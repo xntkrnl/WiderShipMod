@@ -1,6 +1,7 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace WiderShip
 
         public static AssetBundle mainAssetBundle;
         public static GameObject newShipObj;
+
+        public static float lightTemp;
 
         private static WiderShip Instance;
 
@@ -54,11 +57,12 @@ namespace WiderShip
                 return true;
             }
         }
+
         //===================
         //     Patches
         //===================
 
-        [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "Start")]
+        [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
         static void StartPatch()
         {
             var vanilaSI = GameObject.Find("Environment/HangarShip/ShipInside");
@@ -81,21 +85,21 @@ namespace WiderShip
             ///LadderShort (1)
             MoveObjToPoint("LadderShort (1)", new Vector3(-9f, -2.58f, -11.093f), "Environment/HangarShip/");
 
+            ///Lamps
+            string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (9)" };
+            foreach (string lamp in lamps)
+                CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/");
+
+            lightTemp = GameObject.Find("Environment/HangarShip/ShipElectricLights/Area Light (4)").GetComponent<Light>().colorTemperature;
+
             ///ShipInnerRoomBoundsTrigger
             MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -9.1742f), "Environment/HangarShip/");
             ScaleObj("ShipInnerRoomBoundsTrigger", new Vector3(17.52326f, 5.341722f, 11f), "Environment/HangarShip/");
 
-            ///Lamps
-            string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (9)" };
-            foreach (string lamp in lamps)
-                CopyObj(lamp, new Vector3(0f, 0f, -4f), "Environment/HangarShip/ShipElectricLights/");
-
             ///SideMachineryLeft and stuff
             SetChildObjToParentObj("Pipework2.002", "SideMachineryLeft", "Environment/HangarShip/", "Environment/HangarShip/");
-            //MoveObjToPoint("SideMachineryLeft", new Vector3(-6.475f, 1.6f, -9.286f), "Environment/HangarShip/");
-            //GameObject.Find("Environment/HangarShip/SideMachineryLeft").transform.SetParent(GameObject.Find("Environment/HangarShip/ShipModels2b").transform);
-            //Need to do this not in Start
-            GameObject.Find("Environment/HangarShip/SideMachineryLeft").SetActive(false);
+            MoveObjToPoint("SideMachineryLeft", new Vector3(8.304f, 1.6f, -2.597f), "Environment/HangarShip/");
+            SetAnglesObj("SideMachineryLeft", new Vector3(180f, 90f, -90f), "Environment/HangarShip/");
 
             ///Magnet
             MoveObjToPoint("GiantCylinderMagnet", new Vector3(-0.08f, 2.46f, -14.72f), "Environment/HangarShip/");
@@ -166,9 +170,21 @@ namespace WiderShip
             //RotateObj("StickyNoteItem", Vector3.up, "Environment/HangarShip/", -90);
         }
 
+        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "ToggleShipLights")]
+        static void ToggleShipLightsPatch(ref bool ___areLightsOn)
+        {
+            string[] lightSources = new string[4] { "Area Light (4)(Clone)", "Area Light (5)(Clone)", "Area Light (8)(Clone)", "Area Light (9)(Clone)" };
+            foreach (string source in lightSources)
+                if (___areLightsOn == false)
+                    GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().colorTemperature = 4772f;
+                else
+                    GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().colorTemperature = lightTemp;
+        }
+
         //===================
         //     Functions
         //===================
+
         public static void CreateShipObj(GameObject objOriginal, string objFile, int layer, string tag)
         {
             mls.LogMessage($"Trying to create {objFile}...");
@@ -192,6 +208,7 @@ namespace WiderShip
             var newObj = Instantiate(obj, obj.transform.parent);
             newObj.transform.position += vector;
 
+            mls.LogInfo($"New obj name: {newObj.name}, parrent: {newObj.transform.parent.gameObject.name}");
             tmp = newObj.transform.position;
             mls.LogInfo($"newObj Vector3 postion: {tmp.x}, {tmp.y}, {tmp.z}");
         }

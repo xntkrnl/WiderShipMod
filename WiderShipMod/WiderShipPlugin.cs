@@ -15,7 +15,7 @@ namespace WiderShip
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.0.4";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -24,7 +24,9 @@ namespace WiderShip
         public static AssetBundle mainAssetBundle;
         public static GameObject newShipObj;
 
-        public static float lightTemp;
+        public static Material[] lampMaterials;
+        public static Material bulbOnMaterial;
+        public static Material bulbOffMaterial;
 
         private static WiderShip Instance;
 
@@ -90,7 +92,9 @@ namespace WiderShip
             foreach (string lamp in lamps)
                 CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/");
 
-            lightTemp = GameObject.Find("Environment/HangarShip/ShipElectricLights/Area Light (4)").GetComponent<Light>().colorTemperature;
+            lampMaterials = GameObject.Find("Environment/HangarShip/ShipElectricLights/HangingLamp (3)").GetComponent<MeshRenderer>().materials;
+            bulbOnMaterial = lampMaterials[3];
+            bulbOffMaterial = lampMaterials[0];
 
             ///ShipInnerRoomBoundsTrigger
             MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -9.1742f), "Environment/HangarShip/");
@@ -170,15 +174,24 @@ namespace WiderShip
             //RotateObj("StickyNoteItem", Vector3.up, "Environment/HangarShip/", -90);
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "ToggleShipLights")]
-        static void ToggleShipLightsPatch(ref bool ___areLightsOn)
+        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc")]
+        static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
         {
             string[] lightSources = new string[4] { "Area Light (4)(Clone)", "Area Light (5)(Clone)", "Area Light (8)(Clone)", "Area Light (9)(Clone)" };
             foreach (string source in lightSources)
-                if (___areLightsOn == false)
-                    GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().colorTemperature = 4772f;
-                else
-                    GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().colorTemperature = lightTemp;
+                GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().enabled = ___areLightsOn;
+
+            if (___areLightsOn)
+                lampMaterials[3] = bulbOnMaterial;
+            else
+                lampMaterials[3] = bulbOffMaterial;
+
+            string[] lamps = new string[2] { "HangingLamp (3)(Clone)", "HangingLamp (4)(Clone)" };
+            foreach (string lamp in lamps)
+            {
+                var lampObjRend = GameObject.Find("Environment/HangarShip/ShipElectricLights/" + lamp).GetComponent<MeshRenderer>();
+                lampObjRend.materials = lampMaterials;
+            }
         }
 
         //===================

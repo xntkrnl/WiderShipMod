@@ -26,9 +26,9 @@ namespace WiderShipMod
             var vanilaSIMaterials = vanilaSI.GetComponent<MeshRenderer>().materials;
 
             ///Ship and rails
-            WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideEDITED.fbx", 8, "Aluminum"); //GameObject ShipInsideEDITED(Clone)
-            WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", 8, "Untagged");// new Vector3(-10.19258f, 0.45f, -2.25f));
-            WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", 0, "Untagged");// new Vector3(-10.19258f, 0.4117996f, -2.25f));
+            WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideEDITED.fbx", vanilaSI.layer, vanilaSI.tag); //GameObject ShipInsideEDITED(Clone)
+            WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", vanilaSR.layer, vanilaSR.tag);// new Vector3(-10.19258f, 0.45f, -2.25f));
+            WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", vanilaSRP.layer, vanilaSRP.tag);// new Vector3(-10.19258f, 0.4117996f, -2.25f));
 
             WiderShipObjFunctions.MoveObjToPoint("ShipRailsEDITED(Clone)", new Vector3(-10.19258f, 0.45f, -2.25f), "Environment/HangarShip/");
             WiderShipObjFunctions.MoveObjToPoint("ShipRailPostsEDITED(Clone)", new Vector3(-10.19258f, 0.4117996f, -2.25f), "Environment/HangarShip/");

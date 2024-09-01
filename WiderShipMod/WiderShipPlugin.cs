@@ -1,28 +1,28 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using BepInEx.Configuration;
 
 
 namespace WiderShipMod
 {
     [BepInPlugin(modGUID, modName, modVersion)]
+    [BepInDependency("ainavt.lc.lethalconfig")]
     public class WiderShipPlugin : BaseUnityPlugin
     {
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.0.5";
+        private const string modVersion = "1.0.6";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
         public static ManualLogSource mls;
 
         public static AssetBundle mainAssetBundle;
-        public static GameObject newShipObj;
 
         public static Material[] lampMaterials;
         public static Material bulbOnMaterial;
@@ -33,8 +33,9 @@ namespace WiderShipMod
         void Awake()
         {
             Instance = this;
-
-            mls = BepInEx.Logging.Logger.CreateLogSource("Wider Ship");
+            var cfg = new ConfigFile(Path.Combine(Paths.ConfigPath, "mborsh.WiderShipMod.cfg"), true);
+            WiderShipConfig.Config(cfg);
+            mls = BepInEx.Logging.Logger.CreateLogSource("Wider Ship Mod");
             mls = Logger;
 
             mls.LogInfo("Wider Ship Mod loaded. Patching.");

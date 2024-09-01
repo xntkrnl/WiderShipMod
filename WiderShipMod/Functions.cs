@@ -9,15 +9,16 @@ namespace WiderShipMod
 {
     public class WiderShipObjFunctions
     {
-        public static void CreateShipObj(GameObject objOriginal, string objFile, int layer, string tag)
+        public static string CreateShipObj(GameObject objOriginal, string objFile, int layer, string tag)
         {
-            WiderShipPlugin.mls.LogInfo($"Parent: {objOriginal.transform.parent.gameObject.name}...");
-            WiderShipPlugin.newShipObj = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(objFile) as GameObject, objOriginal.transform.parent);
+            var newShipObj = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(objFile) as GameObject, objOriginal.transform.parent);
             //newShipObj.transform.position = objOriginal.transform.position;
-            WiderShipPlugin.newShipObj.transform.position = objOriginal.transform.position;
-            WiderShipPlugin.newShipObj.tag = tag; // "Aluminum"
-            WiderShipPlugin.newShipObj.layer = layer; // 8 - Room
-            WiderShipPlugin.mls.LogMessage($"{objFile} has been created with name {WiderShipPlugin.newShipObj.name}!");
+            newShipObj.transform.position = objOriginal.transform.position;
+            newShipObj.tag = tag; // "Aluminum"
+            newShipObj.layer = layer; // 8 - Room
+            WiderShipPlugin.mls.LogMessage($"{objFile} has been created with name {newShipObj.name}!");
+            //need to do all functions returns GameObject in future
+            return newShipObj.name;
         }
 
         public static void CopyObj(string objName, Vector3 vector, string pathToObj)

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using UnityEngine;
 
 namespace WiderShipMod
@@ -15,25 +16,66 @@ namespace WiderShipMod
 
             ///For future:
 
-            //wall left: 1.269 1.233 -12.723
-            //wall right: -4.673 1.233 -15.639
-            //(need to be adjusted)
+            //wall between right:   soon
+
+            ///materials
+            //walls                 room material [1]
+            //floor                 hull, floor, room(?) materials [0, 2, 1]
+            //ship                  hull, room [0, 1]
+            //need to do config
+
+            ///nav cubes stuff
+            //ON LOAD LEVEL not ship level
+            //Environment/NavMeshColliders/PlayerShipNavmesh/
+            //layer = 15
+            //left wall cube                  15.9511 -3.7588 -5.84           scale  9.2 5.727483 0.6064278
+            //left wall-roof cube              15.9863 -0.9428 -5.6164         scale  9.108706 0.4828268 1.20344
+            //left roof new cube                15.986 -0.5000005 -2.564        scale  9.13 0.2792 5.56
+            //left wall-forward new cube       11.399 -3.7588 -2.72            scale  6.29 5.727483 0.8439286                 rotate up 90
+            //left wall-inner cube 25.5911     -3.7588 -0.87                   scale  4.74 5.727483 0.6064278
+            //left wall-inner-rotate new cube  21.87 -3.7588 -3.64             scale  5.3 5.727483 0.6064278                  rotate up -60
+            //left floor new cube roof              15.986 -5.756 -2.564            scale  9.13 0.2792 5.56
+            //new cube left between                 -1.963 2.668 -16.597            scale  7.5 4.8 0.1                        material = 2 from ship, tag = ship tag, layer = ship layer
+            //new left between cube (14)  same position same scale if config
+            //OR try create copy of floor witch navi surface
+            //roof = floor 0 +6 0
+            //catwalk arround maybe
 
             vanilaSI.SetActive(false);
             vanilaSR.SetActive(false);
             vanilaSRP.SetActive(false);
 
             var vanilaSIMaterials = vanilaSI.GetComponent<MeshRenderer>().materials;
+            var moddedSIMaterials = new Material[vanilaSIMaterials.Length - 2];
+            Array.Copy(vanilaSIMaterials, 0, moddedSIMaterials, 0, 3);
 
             ///Ship and rails
-            WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideEDITED.fbx", vanilaSI.layer, vanilaSI.tag); //GameObject ShipInsideEDITED(Clone)
-            WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", vanilaSR.layer, vanilaSR.tag);// new Vector3(-10.19258f, 0.45f, -2.25f));
-            WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", vanilaSRP.layer, vanilaSRP.tag);// new Vector3(-10.19258f, 0.4117996f, -2.25f));
+
+            //WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideMiddleVanila.fbx", vanilaSI.layer, vanilaSI.tag);
+            //WiderShipObjFunctions.CreateShipObj(vanilaSI, "Floor.fbx", vanilaSI.layer, vanilaSI.tag);
+            string wallName;
+            var ShipInsideLeft = WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideLeftVanila.fbx", vanilaSI.layer, vanilaSI.tag);
+            var FloorLeft = WiderShipObjFunctions.CreateShipObj(vanilaSI, "FloorLeft.fbx", vanilaSI.layer, vanilaSI.tag);
+            WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", vanilaSR.layer, vanilaSR.tag);
+            WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", vanilaSRP.layer, vanilaSRP.tag);
+
+            if (WiderShipConfig.enableLeftInnerWall.Value == true)
+            {
+                if (WiderShipConfig.enableLeftInnerWallSolidMode.Value == true)
+                    wallName = WiderShipObjFunctions.CreateShipObj(vanilaSI, "Wall.fbx", vanilaSI.layer, vanilaSI.tag);
+                else
+                    wallName = WiderShipObjFunctions.CreateShipObj(vanilaSI, "Beams.fbx", vanilaSI.layer, vanilaSI.tag);
+
+                WiderShipObjFunctions.SetAnglesObj(wallName, new Vector3(-89.98f, 0f, 0f), "Environment/HangarShip/");
+                WiderShipObjFunctions.MoveObjToPoint(wallName, new Vector3(0f, 0.952f, -5.224f), "Environment/HangarShip/");
+                GameObject.Find("Environment/HangarShip/" + wallName).GetComponent<MeshRenderer>().material = moddedSIMaterials[1];
+            }
 
             WiderShipObjFunctions.MoveObjToPoint("ShipRailsEDITED(Clone)", new Vector3(-10.19258f, 0.45f, -2.25f), "Environment/HangarShip/");
             WiderShipObjFunctions.MoveObjToPoint("ShipRailPostsEDITED(Clone)", new Vector3(-10.19258f, 0.4117996f, -2.25f), "Environment/HangarShip/");
 
-            GameObject.Find("Environment/HangarShip/ShipInsideEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSIMaterials;
+            GameObject.Find("Environment/HangarShip/FloorLeft(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
+            GameObject.Find("Environment/HangarShip/ShipInsideLeftVanila(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
 
             ///LadderShort (1)
             WiderShipObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-9f, -2.58f, -11.093f), "Environment/HangarShip/");

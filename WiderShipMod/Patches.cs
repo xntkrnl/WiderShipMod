@@ -162,40 +162,47 @@ namespace WiderShipMod
             }
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "OnShipLandedMiscEvents")]
-        static void OnShipLandedMiscEventsPatch(ref bool ___shipHasLanded)
+        [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "openingDoorsSequence")]
+        static void openingDoorsSequencePatch()
         {
             //i hate it so much
-            //light & bulb stuff was not that bad but THIS
-            ///nav cubes stuff
-            //Environment/NavMeshColliders/PlayerShipNavmesh/
-            WiderShipObjFunctions.CopyObj("Cube (17)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.CopyObj("Cube (11)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.CopyObj("Cube (13)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.CopyObj("Cube (6)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.CopyObj("Cube (12)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
-            WiderShipObjFunctions.ScaleObj("Cube (17)(Clone)", new Vector3(11f, 0.4828268f, 5f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.ScaleObj("Cube (6)(Clone)", new Vector3(11f, 0.2792f, 6f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.ScaleObj("Cube (11)", new Vector3(8f, 5.727483f, 0.6064278f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+            try
+            {
+                ///nav cubes stuff
+                //Environment/NavMeshColliders/PlayerShipNavmesh/
+                WiderShipObjFunctions.CopyObj("Cube (17)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (11)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (13)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (6)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (12)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
-            WiderShipObjFunctions.MoveObjToPoint("Cube (16)", new Vector3(15.9863f, -0.9428f, -5.19f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (12)", new Vector3(26.27f, -3.7588f, -0.87f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (11)", new Vector3(16.122f, -3.7588f, -0.23f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (17)(Clone)", new Vector3(17.07f, -0.63f, -2.32f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (11)(Clone)", new Vector3(16.7011f, -3.7588f, -5.39f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (13)", new Vector3(11.57f, -3.7588f, -2.574f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (6)(Clone)", new Vector3(17.2f, -5.75f, -2.091f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-            WiderShipObjFunctions.MoveObjToPoint("Cube (12)(Clone)", new Vector3(22.316f, -3.7588f, -3.269f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.ScaleObj("Cube (17)(Clone)", new Vector3(11f, 0.4828268f, 5f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.ScaleObj("Cube (6)(Clone)", new Vector3(11f, 0.2792f, 6f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.ScaleObj("Cube (11)", new Vector3(8f, 5.727483f, 0.6064278f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
-            WiderShipObjFunctions.RotateObj("Cube (12)(Clone)", Vector3.up, "Environment/NavMeshColliders/PlayerShipNavmesh/", -60f);
+                WiderShipObjFunctions.MoveObjToPoint("Cube (16)", new Vector3(15.9863f, -0.9428f, -5.19f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (12)", new Vector3(26.27f, -3.7588f, -0.87f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (11)", new Vector3(16.122f, -3.7588f, -0.23f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (17)(Clone)", new Vector3(17.07f, -0.63f, -2.32f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (11)(Clone)", new Vector3(16.7011f, -3.7588f, -5.39f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (13)", new Vector3(11.57f, -3.7588f, -2.574f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (6)(Clone)", new Vector3(17.2f, -5.75f, -2.091f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (12)(Clone)", new Vector3(22.316f, -3.7588f, -3.269f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
-            GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").SetActive(false);
-            //prob forgot smth
+                WiderShipObjFunctions.RotateObj("Cube (12)(Clone)", Vector3.up, "Environment/NavMeshColliders/PlayerShipNavmesh/", -60f);
 
-            //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
-            WiderShipObjFunctions.CopyObj("MediumSpace", new Vector3(9.82f, -10.4383f, -2.63f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
-            WiderShipObjFunctions.CopyObj("SmallSpace", new Vector3(19.84f, -10.4383f, -4.77f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+                GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").SetActive(false);
+                //prob forgot smth
+
+                //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
+                WiderShipObjFunctions.CopyObj("MediumSpace", new Vector3(9.82f, -10.4383f, -2.63f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+                WiderShipObjFunctions.CopyObj("SmallSpace", new Vector3(19.84f, -10.4383f, -4.77f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+            }
+            catch
+            {
+                WiderShipPlugin.mls.LogWarning("Can't change navmesh! Is the current planet the Company Building?");
+            }
         }
     }
 }

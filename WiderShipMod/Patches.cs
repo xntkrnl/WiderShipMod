@@ -1,8 +1,6 @@
-﻿using DunGen.Adapters;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace WiderShipMod
 {
@@ -162,11 +160,10 @@ namespace WiderShipMod
             }
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "openingDoorsSequence")]
-        static void openingDoorsSequencePatch()
+        [HarmonyPrefix, HarmonyPatch(typeof(RoundManager), "SpawnOutsideHazards")]
+        static void SpawnOutsideHazardsPatch()
         {
             //i hate it so much
-
             try
             {
                 ///nav cubes stuff
@@ -187,7 +184,7 @@ namespace WiderShipMod
                 WiderShipObjFunctions.MoveObjToPoint("Cube (17)(Clone)", new Vector3(17.07f, -0.63f, -2.32f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
                 WiderShipObjFunctions.MoveObjToPoint("Cube (11)(Clone)", new Vector3(16.7011f, -3.7588f, -5.39f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
                 WiderShipObjFunctions.MoveObjToPoint("Cube (13)", new Vector3(11.57f, -3.7588f, -2.574f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-                WiderShipObjFunctions.MoveObjToPoint("Cube (6)(Clone)", new Vector3(17.2f, -5.75f, -2.091f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (6)(Clone)", new Vector3(17.2f, -5.55f, -2.091f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
                 WiderShipObjFunctions.MoveObjToPoint("Cube (12)(Clone)", new Vector3(22.316f, -3.7588f, -3.269f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
                 WiderShipObjFunctions.RotateObj("Cube (12)(Clone)", Vector3.up, "Environment/NavMeshColliders/PlayerShipNavmesh/", -60f);
@@ -201,7 +198,7 @@ namespace WiderShipMod
             }
             catch
             {
-                WiderShipPlugin.mls.LogWarning("Can't change navmesh! Is the current planet the Company Building?");
+                WiderShipPlugin.mls.LogWarning("Cant change navmesh on that scene!!!");
             }
         }
     }

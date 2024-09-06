@@ -1,6 +1,8 @@
-﻿using HarmonyLib;
+﻿using DunGen.Adapters;
+using HarmonyLib;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace WiderShipMod
 {
@@ -13,37 +15,6 @@ namespace WiderShipMod
             var vanilaSR = GameObject.Find("Environment/HangarShip/ShipRails");
             var vanilaSRP = GameObject.Find("Environment/HangarShip/ShipRailPosts");
             //var catwalk = GameObject.Find("Environment/HangarShip/CatwalkShip");
-
-            ///For future:
-
-            //wall between right:   soon
-
-            ///materials
-            //walls                 room material [1]
-            //floor                 hull, floor, room(?) materials [0, 2, 1]
-            //ship                  hull, room [0, 1]
-            //need to do config
-
-            ///nav cubes stuff
-            //ON LOAD LEVEL not ship level
-            //Environment/NavMeshColliders/PlayerShipNavmesh/
-            //layer = 15
-            //left wall cube                  15.9511 -3.7588 -5.84           scale  9.2 5.727483 0.6064278
-            //left wall-roof cube              15.9863 -0.9428 -5.6164         scale  9.108706 0.4828268 1.20344
-            //left roof new cube                15.986 -0.5000005 -2.564        scale  9.13 0.2792 5.56
-            //left wall-forward new cube       11.399 -3.7588 -2.72            scale  6.29 5.727483 0.8439286                 rotate up 90
-            //left wall-inner cube 25.5911     -3.7588 -0.87                   scale  4.74 5.727483 0.6064278
-            //left wall-inner-rotate new cube  21.87 -3.7588 -3.64             scale  5.3 5.727483 0.6064278                  rotate up -60
-            //left floor new cube roof              15.986 -5.756 -2.564            scale  9.13 0.2792 5.56
-            //new cube left between                 -1.963 2.668 -16.597            scale  7.5 4.8 0.1                        material = 2 from ship, tag = ship tag, layer = ship layer
-            //new left between cube (14)  same position same scale if config
-            //OR try create copy of floor witch navi surface
-            //roof = floor 0 +6 0
-            //catwalk arround maybe
-
-            vanilaSI.SetActive(false);
-            vanilaSR.SetActive(false);
-            vanilaSRP.SetActive(false);
 
             var vanilaSIMaterials = vanilaSI.GetComponent<MeshRenderer>().materials;
             var moddedSIMaterials = new Material[vanilaSIMaterials.Length - 2];
@@ -76,6 +47,10 @@ namespace WiderShipMod
 
             GameObject.Find("Environment/HangarShip/FloorLeft(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
             GameObject.Find("Environment/HangarShip/ShipInsideLeftVanila(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
+
+            vanilaSI.SetActive(false);
+            vanilaSR.SetActive(false);
+            vanilaSRP.SetActive(false);
 
             ///LadderShort (1)
             WiderShipObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-9f, -2.58f, -11.093f), "Environment/HangarShip/");
@@ -113,7 +88,7 @@ namespace WiderShipMod
             WiderShipObjFunctions.ScaleObj("OutsideShip (1)", new Vector3(2.4f, 1.7614f, 1.064288f), "Environment/HangarShip/ReverbTriggers/");
 
             ///Vent
-            WiderShipObjFunctions.MoveObjToPoint("VentEntrance", new Vector3(1.5f, 1f, -4.25f), "Environment/HangarShip/");
+            WiderShipObjFunctions.MoveObjToPoint("VentEntrance", new Vector3(5.715f, 2.104f, -3.376f), "Environment/HangarShip/");
 
             ///ChargeStation
             WiderShipObjFunctions.RotateObj("ChargeStation", Vector3.up, "Environment/HangarShip/ShipModels2b/", -60f);
@@ -130,6 +105,7 @@ namespace WiderShipMod
 
             ///LeavingShip
             GameObject.Find("Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (6)").SetActive(false);
+            //leaving ship (3) pos -2.817 3.2812 -5.797956    scale 2.983845 12.2338 0.8325825
 
             ///LightSwitchContainer
             WiderShipObjFunctions.MoveObjToPoint("LightSwitchContainer", new Vector3(1.5f, 2f, -4.25f), "Environment/HangarShip/");
@@ -150,7 +126,10 @@ namespace WiderShipMod
             WiderShipObjFunctions.ScaleObj("ShipBoundsTrigger", new Vector3(23.75926f, 10.11447f, 14f), "Environment/HangarShip/");
 
             ///FogExclusionZone
-            ///Not needed???
+            //FogExclusionZone copy     pos -2.75 2.23  -11.84          volume 12.8 6.85 7.26
+            WiderShipObjFunctions.CopyObj("FogExclusionZone", new Vector3(-2.75f, 2.23f, -11.84f), "Environment/HangarShip/");
+            //idk how to rescale volume so.. =(
+
 
             ///AnimatedShipDoor
             WiderShipObjFunctions.MoveObj("AnimatedShipDoor", new Vector3(-0.25f, 0f, 0f), "Environment/HangarShip/");
@@ -161,13 +140,9 @@ namespace WiderShipMod
             ///SingleScreen
             WiderShipObjFunctions.SetAnglesObj("SingleScreen", new Vector3(-90f, -90f, -28f), "Environment/HangarShip/ShipModels2b/MonitorWall/");
             WiderShipObjFunctions.MoveObjToPoint("SingleScreen", new Vector3(-13.803f, -1.4f, -0.756f), "Environment/HangarShip/ShipModels2b/MonitorWall/");
-
-            ///StickyNoteItem
-            //MoveObjToPoint("StickyNoteItem", new Vector3(9.145f, 1.956f, -5.312f), "Environment/HangarShip/");
-            //RotateObj("StickyNoteItem", Vector3.up, "Environment/HangarShip/", -90);
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc")]
+        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
         static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
         {
             string[] lightSources = new string[4] { "Area Light (4)(Clone)", "Area Light (5)(Clone)", "Area Light (8)(Clone)", "Area Light (9)(Clone)" };
@@ -184,6 +159,48 @@ namespace WiderShipMod
             {
                 var lampObjRend = GameObject.Find("Environment/HangarShip/ShipElectricLights/" + lamp).GetComponent<MeshRenderer>();
                 lampObjRend.materials = WiderShipPlugin.lampMaterials;
+            }
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "SceneManager_OnLoadComplete1")]
+        static void SceneManager_OnLoadComplete1Patch()
+        {
+            //i hate it so much
+            //light & bulb stuff was not that bad but THIS
+
+            //prob dont even need this if
+            if (SceneManager.GetActiveScene().name != "SampleSceneRelay")
+            {
+
+                ///nav cubes stuff
+                //Environment/NavMeshColliders/PlayerShipNavmesh/
+                WiderShipObjFunctions.CopyObj("Cube (17)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (11)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (13)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (6)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.CopyObj("Cube (12)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+
+                WiderShipObjFunctions.ScaleObj("Cube (17)(Clone)", new Vector3(11f, 0.4828268f, 5f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.ScaleObj("Cube (6)(Clone)", new Vector3(11f, 0.2792f, 6f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.ScaleObj("Cube (11)", new Vector3(8f, 5.727483f, 0.6064278f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+
+                WiderShipObjFunctions.MoveObjToPoint("Cube (16)", new Vector3(15.9863f, -0.9428f, -5.19f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (12)", new Vector3(26.27f, -3.7588f, -0.87f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (11)", new Vector3(16.122f, -3.7588f, -0.23f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (17)(Clone)", new Vector3(17.07f, -0.63f, -2.32f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (11)(Clone)", new Vector3(16.7011f, -3.7588f, -5.39f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (13)", new Vector3(11.57f, -3.7588f, -2.574f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (6)(Clone)", new Vector3(17.2f, -5.75f, -2.091f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                WiderShipObjFunctions.MoveObjToPoint("Cube (12)(Clone)", new Vector3(22.316f, -3.7588f, -3.269f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+
+                WiderShipObjFunctions.RotateObj("Cube (12)(Clone)", Vector3.up, "Environment/NavMeshColliders/PlayerShipNavmesh/", -60f);
+
+                GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").SetActive(false);
+                //prob forgot smth
+
+                //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
+                WiderShipObjFunctions.CopyObj("MediumSpace", new Vector3(9.82f, -10.4383f, -2.63f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+                WiderShipObjFunctions.CopyObj("SmallSpace", new Vector3(19.84f, -10.4383f, -4.77f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
             }
         }
     }

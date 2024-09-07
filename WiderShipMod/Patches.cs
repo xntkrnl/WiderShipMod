@@ -15,6 +15,7 @@ namespace WiderShipMod
             //var catwalk = GameObject.Find("Environment/HangarShip/CatwalkShip");
 
             var vanilaSIMaterials = vanilaSI.GetComponent<MeshRenderer>().materials;
+            var vanilaSRMaterials = vanilaSR.GetComponent<MeshRenderer>().materials;
             var moddedSIMaterials = new Material[vanilaSIMaterials.Length - 2];
             Array.Copy(vanilaSIMaterials, 0, moddedSIMaterials, 0, 3);
 
@@ -45,6 +46,9 @@ namespace WiderShipMod
 
             GameObject.Find("Environment/HangarShip/FloorLeft(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
             GameObject.Find("Environment/HangarShip/ShipInsideLeftVanila(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
+            GameObject.Find("Environment/HangarShip/ShipRailsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
+            GameObject.Find("Environment/HangarShip/ShipRailPostsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
+
 
             vanilaSI.SetActive(false);
             vanilaSR.SetActive(false);

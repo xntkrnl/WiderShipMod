@@ -104,6 +104,8 @@ namespace WiderShipMod
             ///LeavingShip
             GameObject.Find("Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (6)").SetActive(false);
             //leaving ship (3) pos -2.817 3.2812 -5.797956    scale 2.983845 12.2338 0.8325825
+            WiderShipObjFunctions.MoveObjToPoint("LeavingShip (3)", new Vector3(-2.74f, 3.2812f, -5.7979f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+            WiderShipObjFunctions.ScaleObj("LeavingShip (3)", new Vector3(3f, 12.2338f, 0.8325825f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
             ///LightSwitchContainer
             WiderShipObjFunctions.MoveObjToPoint("LightSwitchContainer", new Vector3(1.5f, 2f, -4.25f), "Environment/HangarShip/");
@@ -193,8 +195,8 @@ namespace WiderShipMod
                 //prob forgot smth
 
                 //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
-                WiderShipObjFunctions.CopyObj("MediumSpace", new Vector3(9.82f, -10.4383f, -2.63f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
-                WiderShipObjFunctions.CopyObj("SmallSpace", new Vector3(19.84f, -10.4383f, -4.77f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+                WiderShipObjFunctions.CopyObj("MediumSpace", new Vector3(0f, 0f, -4f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
+                WiderShipObjFunctions.CopyObj("SmallSpace", new Vector3(0f, 0f, -6f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
             }
             catch
             {

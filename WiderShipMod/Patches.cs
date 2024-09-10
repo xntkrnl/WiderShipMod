@@ -13,7 +13,7 @@ namespace WiderShipMod
             var vanilaSI = GameObject.Find("Environment/HangarShip/ShipInside");
             var vanilaSR = GameObject.Find("Environment/HangarShip/ShipRails");
             var vanilaSRP = GameObject.Find("Environment/HangarShip/ShipRailPosts");
-            //var catwalk = GameObject.Find("Environment/HangarShip/CatwalkShip");
+            var catwalk = GameObject.Find("Environment/HangarShip/CatwalkShip");
 
             var vanilaSIMaterials = vanilaSI.GetComponent<MeshRenderer>().materials;
             var vanilaSRMaterials = vanilaSR.GetComponent<MeshRenderer>().materials;
@@ -27,8 +27,8 @@ namespace WiderShipMod
             string wallName;
             var ShipInsideLeft = WiderShipObjFunctions.CreateShipObj(vanilaSI, "ShipInsideLeftVanila.fbx", vanilaSI.layer, vanilaSI.tag);
             var FloorLeft = WiderShipObjFunctions.CreateShipObj(vanilaSI, "FloorLeft.fbx", vanilaSI.layer, vanilaSI.tag);
-            //WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", vanilaSR.layer, vanilaSR.tag);
-            //WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", vanilaSRP.layer, vanilaSRP.tag);
+            WiderShipObjFunctions.CreateShipObj(vanilaSR, "ShipRailsEDITED.fbx", vanilaSR.layer, vanilaSR.tag);
+            WiderShipObjFunctions.CreateShipObj(vanilaSRP, "ShipRailPostsEDITED.fbx", vanilaSRP.layer, vanilaSRP.tag);
 
             if (WiderShipConfig.enableLeftInnerWall.Value == true)
             {
@@ -42,18 +42,18 @@ namespace WiderShipMod
                 GameObject.Find("Environment/HangarShip/" + wallName).GetComponent<MeshRenderer>().material = moddedSIMaterials[1];
             }
 
-            //WiderShipObjFunctions.MoveObjToPoint("ShipRailsEDITED(Clone)", new Vector3(-10.19258f, 0.45f, -2.25f), "Environment/HangarShip/");
-            //WiderShipObjFunctions.MoveObjToPoint("ShipRailPostsEDITED(Clone)", new Vector3(-10.19258f, 0.4117996f, -2.25f), "Environment/HangarShip/");
+            WiderShipObjFunctions.MoveObjToPoint("ShipRailsEDITED(Clone)", new Vector3(-10.19258f, 0.45f, -2.25f), "Environment/HangarShip/");
+            WiderShipObjFunctions.MoveObjToPoint("ShipRailPostsEDITED(Clone)", new Vector3(-10.19258f, 0.4117996f, -2.25f), "Environment/HangarShip/");
 
             GameObject.Find("Environment/HangarShip/FloorLeft(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
             GameObject.Find("Environment/HangarShip/ShipInsideLeftVanila(Clone)").GetComponent<MeshRenderer>().materials = moddedSIMaterials;
-            //GameObject.Find("Environment/HangarShip/ShipRailsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
-            //GameObject.Find("Environment/HangarShip/ShipRailPostsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
+            GameObject.Find("Environment/HangarShip/ShipRailsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
+            GameObject.Find("Environment/HangarShip/ShipRailPostsEDITED(Clone)").GetComponent<MeshRenderer>().materials = vanilaSRMaterials;
 
 
             vanilaSI.SetActive(false);
-            //vanilaSR.SetActive(false);
-            //vanilaSRP.SetActive(false);
+            vanilaSR.SetActive(false);
+            vanilaSRP.SetActive(false);
 
             ///LadderShort (1)
             WiderShipObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-9f, -2.58f, -11.093f), "Environment/HangarShip/");

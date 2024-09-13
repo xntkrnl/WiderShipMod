@@ -16,7 +16,7 @@ namespace WiderShipMod
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.1.5";
+        private const string modVersion = "1.2.0";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 

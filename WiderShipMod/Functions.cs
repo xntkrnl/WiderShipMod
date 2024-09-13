@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace WiderShipMod
 {
-    public class WiderShipObjFunctions
+    public class ObjFunctions
     {
         public static string CreateShipObj(GameObject objOriginal, string objFile, int layer, string tag)
         {

@@ -1,7 +1,8 @@
 ﻿using HarmonyLib;
 using System;
-using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 namespace WiderShipMod
 {
@@ -12,25 +13,6 @@ namespace WiderShipMod
         {
             ShipPartsFunctions.Init();
             ShipPartsFunctions.CreateBothParts();
-        }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "SpawnUnlockable")]
-        static void SpawnUnlockablePatch()
-        {
-            //please don't hate me for this
-            ShipPartsFunctions.MoveLightSwitch();
-        }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "LoadShipGrabbableItems")]
-        static void LoadShipGrabbableItemsPatch(ref int[] ___array, ref int[] ___array2)
-        {
-            //please work
-            var go = GameObject.FindGameObjectsWithTag("PhysicsProp");
-            foreach (GameObject o in go)
-            {
-                if (o.transform.position.y < 0.2)
-                    o.GetComponent<GrabbableObject>().targetFloorPosition.y = 0.2f;
-            }
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
@@ -96,7 +78,7 @@ namespace WiderShipMod
 
                 ObjFunctions.RotateObj("Cube (12)(Clone)_left", Vector3.up, "Environment/NavMeshColliders/PlayerShipNavmesh/", -60f);
 
-                GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").SetActive(false);
+                
                 //prob forgot smth
 
                 //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
@@ -106,6 +88,8 @@ namespace WiderShipMod
                 ///nav cubes stuff
                 ///RIGHT PART
                 //Environment/NavMeshColliders/PlayerShipNavmesh/
+                GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (10)").SetActive(false);
+
                 ObjFunctions.CopyObj("Cube (17)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/").name += "_right";
                 ObjFunctions.CopyObj("Cube (12)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/").name += "_right";
                 ObjFunctions.CopyObj("Cube (12)(Clone)_left", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/").name = "Cube (12)(Clone)_right (2)";
@@ -126,6 +110,8 @@ namespace WiderShipMod
                 ObjFunctions.MoveObjToPoint("Cube (17)(Clone)_right", new Vector3(17.07f, -0.63f, 6.93f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
                 ObjFunctions.MoveObjToPoint("Cube (6)(Clone)_right", new Vector3(17.2f, -5.55f, 6.659f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
+                ObjFunctions.SetAnglesObj("Cube (12)(Clone)_right (2)", new Vector3(0f, 60f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+
                 //Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/
                 ObjFunctions.CopyObj("MediumSpace", new Vector3(0f, 0f, 4f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
                 ObjFunctions.CopyObj("SmallSpace", new Vector3(0f, 0f, 6f), "Environment/NavMeshColliders/PlayerShipNavmesh/SpaceBelowShip/");
@@ -133,14 +119,35 @@ namespace WiderShipMod
 
                 ///nav cubes stuff
                 ///CATWALK
+                GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").SetActive(false);
+
                 ObjFunctions.ScaleObj("Cube", new Vector3(2.69503f, 0.2792f, 18f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
 
                 ObjFunctions.MoveObjToPoint("Cube", new Vector3(9.7117f, -5.75f, 3.69f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-                ObjFunctions.MoveObjToPoint("Cube (2)", new Vector3(16.0801f, -5.75f, 11.64f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-                ObjFunctions.MoveObjToPoint("Cube (3)", new Vector3(27.25f, -5.75f, 7.1267f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                ObjFunctions.MoveObjToPoint("Cube (2)", new Vector3(17.53f, -5.75f, 11.64f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                ObjFunctions.MoveObjToPoint("Cube (3)", new Vector3(25.3f, -5.75f, 7.1267f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
                 ObjFunctions.CopyObj("Cube (3)", new Vector3(0f, 0f, 0f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-                ObjFunctions.MoveObjToPoint("Cube (3)", new Vector3(25.72f, -5.75f, 7.65f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
-                ObjFunctions.ScaleObj("Cube (3)", new Vector3(25.72f, -5.75f, 7.65f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                ObjFunctions.MoveObjToPoint("Cube (3)", new Vector3(25.39f, -5.75f, 11f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                ObjFunctions.ScaleObj("Cube (3)", new Vector3(5f, 0.2792f, 5f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+                ObjFunctions.ScaleObj("Cube (2)", new Vector3(12.93f, 0.2792f, 2.784142f), "Environment/NavMeshColliders/PlayerShipNavmesh/");
+
+                //ladder nodes (off mesh)
+                ObjFunctions.MoveObjToPoint("A", new Vector3(1.89f, -4.72f, 3.1f), "Environment/NavMeshColliders/OffMeshLinks/ShipLadder/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(0.644f, -0.98f, 1.76f), "Environment/NavMeshColliders/OffMeshLinks/ShipLadder/");
+
+                ObjFunctions.MoveObjToPoint("A", new Vector3(-2.44f, -2.66f, -4.62f), "Environment/NavMeshColliders/OffMeshLinks/ShipLadder2/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(-2.44f, -1.054f, -2.972f), "Environment/NavMeshColliders/OffMeshLinks/ShipLadder2/");
+
+                ObjFunctions.MoveObjToPoint("A", new Vector3(-7.96f, -0.74f, 3.16f), "Environment/NavMeshColliders/PlayerShipNavmesh/ShipLadder3/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(-8.11f, 4.473f, 1.559f), "Environment/NavMeshColliders/PlayerShipNavmesh/ShipLadder3/");
+
+                //why is this not navmeshlink
+                string[] ladders = new string[3] { "Environment/NavMeshColliders/OffMeshLinks/ShipLadder", "Environment/NavMeshColliders/OffMeshLinks/ShipLadder2/", "Environment/NavMeshColliders/PlayerShipNavmesh/ShipLadder3" };
+                
+                foreach (string ladder in ladders)
+                {
+                    GameObject.Find(ladder).GetComponent<OffMeshLink>().UpdatePositions();
+                }
 
                 GameObject go = GameObject.FindGameObjectWithTag("OutsideLevelNavMesh");
                 if (go != null)
@@ -148,9 +155,9 @@ namespace WiderShipMod
                     go.GetComponent<NavMeshSurface>().BuildNavMesh();
                 }
             }
-            catch
-            {
+            catch (Exception e) {
                 WiderShipPlugin.mls.LogWarning("Cant change navmesh on that scene!!!");
+                WiderShipPlugin.mls.LogError(e.ToString());
             }
         }
     }

@@ -55,7 +55,7 @@ namespace WiderShipMod
             bool needOffmesh = true;
             if (GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh/Cube (1)").GetComponent<Renderer>().isPartOfStaticBatch)
             {
-                HUDManager.Instance.DisplayTip("WiderShip Error!", "This moon has static navigation surfaces that cannot be changed. The ship will have vanilla navmesh. Proceed with caution.", isWarning: true, useSave: false, "WS_WarningTip");
+                HUDManager.Instance.DisplayTip("WiderShip Error!", "This moon has static navigation surfaces that cannot be changed. The new ship parts are not safe for this moon. Proceed with caution.", isWarning: true, useSave: false, "WS_WarningTip");
                 needOffmesh = false;
             }
             else

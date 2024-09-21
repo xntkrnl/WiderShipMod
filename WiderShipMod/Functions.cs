@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 namespace WiderShipMod
@@ -315,11 +316,11 @@ namespace WiderShipMod
             MiscStuff();
         }
 
-        public static void MoveLightSwitch()
+        /*public static void MoveLightSwitch()
         {
             var lightswitch = GameObject.Find("Environment/HangarShip/LightSwitchContainer");
             lightswitch.transform.position = new Vector3(5.2f, 1.417171f, -3.327f);
-        }
+        }*/
 
         public static void MiscStuff()
         {
@@ -331,6 +332,22 @@ namespace WiderShipMod
             vanilaCatwalkRL.SetActive(false);
             moddedPoster.name = vanilaPosters.name;
             Destroy(vanilaPosters);
+        }
+
+        public static void GenerateNavMesh()
+        {
+            var parent = GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh").transform;
+            var prefab = WiderShipPlugin.mainAssetBundle.LoadAsset<GameObject>("ShipVanilaNavmesh.prefab");
+
+            var prefabInst = Instantiate(prefab, parent.parent);
+            prefabInst.transform.position = parent.position;
+
+            foreach (Transform child in parent)
+            {
+                if (child.gameObject.GetComponent<NavMeshModifier>())
+                    Destroy(child.gameObject);
+                else child.SetParent(prefabInst.transform);
+            }
         }
     }
 }

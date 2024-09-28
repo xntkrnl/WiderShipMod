@@ -52,13 +52,14 @@ namespace WiderShipMod
         static void FinishGeneratingLevelPatch()
         {
             //i hate it so much
-            bool needOffmesh = true;
             string cubePath = "Environment/NavMeshColliders/PlayerShipNavmesh/";
             string ladderPath = "";
 
             if (GameObject.Find("PlayerShipNavmesh/Cube (1)").GetComponent<Renderer>().isPartOfStaticBatch)
             {
-                HUDManager.Instance.DisplayTip("WiderShip Error!", "This moon has static navigation surfaces that cannot be changed. Expect bugs. Proceed with caution.", isWarning: true, useSave: false, "WS_WarningTip");
+                if (WiderShipConfig.enableWarning.Value)
+                    HUDManager.Instance.DisplayTip("WiderShip Error!", "This moon has static navigation surfaces that cannot be changed. Expect bugs. Proceed with caution.", isWarning: true, useSave: false, "WS_WarningTip");
+
                 //needOffmesh = false;
                 ShipPartsFunctions.GenerateNavMesh();
                 cubePath = "Environment/NavMeshColliders/ShipVanilaNavmesh(Clone)/NavMeshColliders/PlayerShipNavmesh/";
@@ -155,37 +156,33 @@ namespace WiderShipMod
                 WiderShipPlugin.mls.LogError(ex.ToString());
             }
 
-
-            if (needOffmesh)
+            try
             {
-                try
+
+                //ladder nodes (off mesh)
+                ObjFunctions.MoveObjToPoint("A", new Vector3(1.89f, -4.72f, 3.1f), ladderPath + "ShipLadder/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(0.644f, -0.98f, 1.76f), ladderPath + "ShipLadder/");
+
+                ObjFunctions.MoveObjToPoint("A", new Vector3(-2.44f, -2.66f, -4.62f), ladderPath + "ShipLadder2/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(-2.44f, -1.054f, -2.972f), ladderPath + "ShipLadder2/");
+
+                ObjFunctions.MoveObjToPoint("A", new Vector3(-7.96f, -0.74f, 3.16f), ladderPath + "ShipLadder3/");
+                ObjFunctions.MoveObjToPoint("B", new Vector3(-8.11f, 4.473f, 1.559f), ladderPath + "ShipLadder3/");
+
+                //why is this not navmeshlink
+                string[] ladders = new string[3] { "ShipLadder", "ShipLadder2", "ShipLadder3" };
+
+                foreach (string ladder in ladders)
                 {
-
-                    //ladder nodes (off mesh)
-                    ObjFunctions.MoveObjToPoint("A", new Vector3(1.89f, -4.72f, 3.1f), ladderPath + "ShipLadder/");
-                    ObjFunctions.MoveObjToPoint("B", new Vector3(0.644f, -0.98f, 1.76f), ladderPath + "ShipLadder/");
-
-                    ObjFunctions.MoveObjToPoint("A", new Vector3(-2.44f, -2.66f, -4.62f), ladderPath + "ShipLadder2/");
-                    ObjFunctions.MoveObjToPoint("B", new Vector3(-2.44f, -1.054f, -2.972f), ladderPath + "ShipLadder2/");
-
-                    ObjFunctions.MoveObjToPoint("A", new Vector3(-7.96f, -0.74f, 3.16f), ladderPath + "ShipLadder3/");
-                    ObjFunctions.MoveObjToPoint("B", new Vector3(-8.11f, 4.473f, 1.559f), ladderPath + "ShipLadder3/");
-
-                    //why is this not navmeshlink
-                    string[] ladders = new string[3] { "ShipLadder", "ShipLadder2", "ShipLadder3" };
-
-                    foreach (string ladder in ladders)
-                    {
-                        GameObject.Find(ladder).GetComponent<OffMeshLink>().UpdatePositions();
-                    }
+                    GameObject.Find(ladder).GetComponent<OffMeshLink>().UpdatePositions();
                 }
-                catch (Exception ex)
-                {
-                    WiderShipPlugin.mls.LogWarning("Cant change offmesh on that scene!!!");
-                    WiderShipPlugin.mls.LogError(ex.ToString());
-                }
-
             }
+            catch (Exception ex)
+            {
+                WiderShipPlugin.mls.LogWarning("Cant change offmesh on that scene!!!");
+                WiderShipPlugin.mls.LogError(ex.ToString());
+            }
+
         }
     }
 }

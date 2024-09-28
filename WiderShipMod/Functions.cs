@@ -6,11 +6,6 @@ namespace WiderShipMod
 {
     public class ObjFunctions
     {
-        // a lot of bad things happens here
-        // darkest place on earth
-        // esp rotation. i hate eulers
-        // ok maybe navmesh is darker but anyway
-
         public static GameObject CreateShipObj(GameObject objOriginal, string objFile, int layer, string tag)
         {
             var newShipObj = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(objFile) as GameObject, objOriginal.transform.parent);
@@ -321,6 +316,12 @@ namespace WiderShipMod
             MiscStuff();
         }
 
+        /*public static void MoveLightSwitch()
+        {
+            var lightswitch = GameObject.Find("Environment/HangarShip/LightSwitchContainer");
+            lightswitch.transform.position = new Vector3(5.2f, 1.417171f, -3.327f);
+        }*/
+
         public static void MiscStuff()
         {
             vanilaSI.SetActive(false);
@@ -335,19 +336,17 @@ namespace WiderShipMod
 
         public static void GenerateNavMesh()
         {
-            var oldnavmesh = GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh").transform;
-            var prefab = WiderShipPlugin.mainAssetBundle.LoadAsset<GameObject>("navmesh.prefab");
+            var parent = GameObject.Find("Environment/NavMeshColliders/PlayerShipNavmesh").transform;
+            var prefab = WiderShipPlugin.mainAssetBundle.LoadAsset<GameObject>("ShipVanilaNavmesh.prefab");
 
-            var wsnavmesh = Instantiate(prefab, oldnavmesh.parent);
-            wsnavmesh.transform.position = oldnavmesh.position;
-            Destroy(oldnavmesh);
+            var prefabInst = Instantiate(prefab, parent.parent);
+            prefabInst.transform.position = parent.position;
 
-            var offmesh = GameObject.Find("Environment/NavMeshColliders/OffMeshLinks").transform;
-
-            foreach (Transform child in offmesh)
+            foreach (Transform child in parent)
             {
-                if (child.name.Contains("ShipLadder"))
+                if (child.gameObject.GetComponent<NavMeshModifier>())
                     Destroy(child.gameObject);
+                else child.SetParent(prefabInst.transform);
             }
         }
     }

@@ -1,19 +1,32 @@
 ﻿using BepInEx.Configuration;
-using LethalConfig;
-using LethalConfig.ConfigItems;
 
 namespace WiderShipMod
 {
-    public class WiderShipConfig
+    internal enum Side
     {
-        public static ConfigEntry<bool> enableLeftInnerWall;
-        public static ConfigEntry<bool> enableLeftInnerWallSolidMode;
-        public static ConfigEntry<bool> enableRightInnerWall;
-        public static ConfigEntry<bool> enableRightInnerWallSolidMode;
-        public static ConfigEntry<bool> enableWarning;
+        Left,
+        Right,
+        Both
+    }
 
-        public static void Config(ConfigFile cfg)
+    internal class WiderShipConfig
+    {
+        internal static ConfigEntry<Side> extendedSide;
+        internal static ConfigEntry<bool> enableWarning;
+
+        internal static ConfigEntry<bool> enableLeftInnerWall;
+        internal static ConfigEntry<bool> enableLeftInnerWallSolidMode;
+
+        internal static ConfigEntry<bool> enableRightInnerWall;
+        internal static ConfigEntry<bool> enableRightInnerWallSolidMode;
+
+        internal static void Config(ConfigFile cfg)
         {
+            extendedSide = cfg.Bind("General", "Extended Side", Side.Both,
+                "Left - only left side;\nRight - only right side;\nBoth - both sides.");
+            enableWarning = cfg.Bind("General", "Enable Warning", true,
+                "Enable if you want to know when to expect more bugs lol.");
+
             enableLeftInnerWall = cfg.Bind("Left Part", "Enable Left Inner Wall", true,
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");
             enableLeftInnerWallSolidMode = cfg.Bind("Left Part", "Solid Left Inner Wall", false,
@@ -23,25 +36,6 @@ namespace WiderShipMod
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");
             enableRightInnerWallSolidMode = cfg.Bind("Right Part", "Solid Right Inner Wall", false,
                 "Enable if you want your wall to be solid. Doesn't work without Left Inner Wall enabled.");
-
-            enableWarning = cfg.Bind("Warning", "Enable Warning", true,
-                "Enable if you want to know when to expect more bugs lol.");
-
-            var boolLeftInnerWall = new BoolCheckBoxConfigItem(enableLeftInnerWall);
-            var boolLeftInnerWallSolidMode = new BoolCheckBoxConfigItem(enableLeftInnerWallSolidMode);
-
-            var boolRightInnerWall = new BoolCheckBoxConfigItem(enableRightInnerWall);
-            var boolRightInnerWallSolidMode = new BoolCheckBoxConfigItem(enableRightInnerWallSolidMode);
-
-            var boolWarning = new BoolCheckBoxConfigItem(enableWarning);
-
-            LethalConfigManager.AddConfigItem(boolLeftInnerWall);
-            LethalConfigManager.AddConfigItem(boolLeftInnerWallSolidMode);
-
-            LethalConfigManager.AddConfigItem(boolRightInnerWall);
-            LethalConfigManager.AddConfigItem(boolRightInnerWallSolidMode);
-
-            LethalConfigManager.AddConfigItem(boolWarning);
         }
     }
 }

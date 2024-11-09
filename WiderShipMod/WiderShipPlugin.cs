@@ -10,7 +10,6 @@ using BepInEx.Configuration;
 namespace WiderShipMod
 {
     [BepInPlugin(modGUID, modName, modVersion)]
-    [BepInDependency("ainavt.lc.lethalconfig")]
     public class WiderShipPlugin : BaseUnityPlugin
     {
         // Mod Details

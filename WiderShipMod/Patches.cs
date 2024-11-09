@@ -18,34 +18,31 @@ namespace WiderShipMod
         [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
         static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
         {
-            string[] lightSources = new string[8] { "Area Light (4)(Clone)_left", "Area Light (5)(Clone)_left", "Area Light (8)(Clone)_left", "Area Light (7)(Clone)_left",
-                "Area Light (4)(Clone)_right", "Area Light (5)(Clone)_right", "Area Light (8)(Clone)_right", "Area Light (7)(Clone)_right" };
-            foreach (string source in lightSources)
-                try
-                {
-                    GameObject.Find("Environment/HangarShip/ShipElectricLights/" + source).GetComponent<Light>().enabled = ___areLightsOn;
-                }
-                catch
-                {
-                    WiderShipPlugin.mls.LogInfo($"Can't find a light source: {source}");
-                }
+            var ShipElectricLight = GameObject.Find("Environment/HangarShip/ShipElectricLights").transform;
 
             if (___areLightsOn)
                 ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOnMaterial;
             else
                 ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOffMaterial;
 
-            string[] lamps = new string[4] { "HangingLamp (3)(Clone)_left", "HangingLamp (4)(Clone)_left", "HangingLamp (3)(Clone)_right", "HangingLamp (4)(Clone)_right" };
-            foreach (string lamp in lamps)
-                try
+            foreach (Transform child in ShipElectricLight)
+            {
+                var light = child.GetComponent<Light>();
+                if (light != null)
                 {
-                    var lampObjRend = GameObject.Find("Environment/HangarShip/ShipElectricLights/" + lamp).GetComponent<MeshRenderer>();
-                    lampObjRend.materials = ShipPartsFunctions.lampMaterials;
+                    light.enabled = ___areLightsOn;
+                    continue;
                 }
-                catch
+
+                var meshRenderer = child.GetComponent<MeshRenderer>();
+                if (meshRenderer != null)
                 {
-                    WiderShipPlugin.mls.LogInfo($"Can't find a lamp: {lamp}");
+                    meshRenderer.materials = ShipPartsFunctions.lampMaterials;
+                    continue;
                 }
+
+                WiderShipPlugin.mls.LogDebug($"Huh? What is {child.name} ? Send this to Wider Ship dev please :)");
+            }
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]

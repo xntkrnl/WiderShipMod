@@ -38,15 +38,20 @@ namespace WiderShipMod
             mls = BepInEx.Logging.Logger.CreateLogSource("Wider Ship Mod");
             mls = Logger;
 
-            mls.LogInfo("Wider Ship Mod loaded. Patching.");
-            //harmony.PatchAll(typeof(WiderShipObjFunctions));
-            harmony.PatchAll(typeof(WiderShipPatches));
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MelanieMelicious.2StoryShip"))
+            {
+                mls.LogMessage("Hi Mel, ñan you do all the hard work for me since 2StoryShip here?");
+                return; //nothing is patched
+            }
 
             if (!LoadAssetBundle())
             {
                 mls.LogError("Failed to load asset bundle! Abort mission!");
                 return;
             }
+
+            mls.LogInfo("Wider Ship Mod loaded. Patching.");
+            harmony.PatchAll(typeof(WiderShipPatches));
 
             bool LoadAssetBundle()
             {

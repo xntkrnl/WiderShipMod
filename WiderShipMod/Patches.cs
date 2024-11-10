@@ -12,10 +12,10 @@ namespace WiderShipMod
         static void StartPatch()
         {
             ShipPartsFunctions.Init();
-            ShipPartsFunctions.CreateBothParts();
+            ShipPartsFunctions.CreateShip();
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
+        [HarmonyPrefix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
         static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
         {
             var ShipElectricLight = GameObject.Find("Environment/HangarShip/ShipElectricLights").transform;
@@ -45,7 +45,7 @@ namespace WiderShipMod
             }
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]
+        /*[HarmonyPostfix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]
         static void FinishGeneratingLevelPatch()
         {
             //i hate it so much
@@ -180,6 +180,6 @@ namespace WiderShipMod
                 WiderShipPlugin.mls.LogError(ex.ToString());
             }
 
-        }
+        }*/
     }
 }

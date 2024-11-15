@@ -120,7 +120,7 @@ namespace WiderShipMod
 
         public static void CreateShip()
         {
-            //network stuff for walls here somewhere . . .
+            //network stuff for walls here somewhere or in other place? . . .
 
             //. . .
 
@@ -134,13 +134,13 @@ namespace WiderShipMod
 
                 case Side.Right:
                     {
-                        //CreateRightSide();
+                        CreateRightSide();
                         break;
                     }
 
                 case Side.Both:
                     {
-                        //CreateBothSides();
+                        CreateBothSides();
                         break;
                     }
             }
@@ -243,7 +243,7 @@ namespace WiderShipMod
         public static void CreateBothSides()
         {
             var ship = ObjFunctions.CreateShipObj(vanilaSI, "ShipBoth.prefab", vanilaSI.layer, vanilaSI.tag);
-            moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Left.fbx", vanilaPosters.layer, vanilaPosters.tag);
+            moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Both.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
             ship.transform.localPosition = Vector3.zero;
             moddedPoster.transform.localPosition = new Vector3(-8.34465e-07f, 2.157811f, -5.229f);
@@ -285,12 +285,6 @@ namespace WiderShipMod
             ///Not sure why we need this collider
             GameObject.Find("Environment/HangarShip/WallInsulator2").SetActive(false);
             GameObject.Find("Environment/HangarShip/WallInsulator").SetActive(false);
-
-            ///Railing (Colliders)
-            string[] colliders = new string[2] { "Cube (1)", "Cube (3)" };
-            foreach (string collider in colliders)
-                GameObject.Find("Environment/HangarShip/Railing/" + collider).SetActive(false);
-            ObjFunctions.MoveObjToPoint("Cube (2)", new Vector3(-7.625f, 0.64f, -11.119f), "Environment/HangarShip/Railing/");
 
             ///ShipBoundsTrigger
             ObjFunctions.MoveObjToPoint("ShipBoundsTrigger", new Vector3(1.4908f, 4.1675f, -6.73f), "Environment/HangarShip/");
@@ -368,6 +362,18 @@ namespace WiderShipMod
             ///AnimatedShipDoor
             ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(6.412f, 2.546f, -3.328f), "Environment/HangarShip/AnimatedShipDoor/");
             ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, 0f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
+        }
+
+        public static void CreateRightSide()
+        {
+            var ship = ObjFunctions.CreateShipObj(vanilaSI, "ShipRight.prefab", vanilaSI.layer, vanilaSI.tag);
+            moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Right.fbx", vanilaPosters.layer, vanilaPosters.tag);
+
+            ship.transform.localPosition = Vector3.zero;
+            moddedPoster.transform.localPosition = new Vector3(-8.34465e-07f, 2.157811f, -5.229f);
+
+            ///Railing (collider)
+            GameObject.Destroy(GameObject.Find("HangarShip/Railing"));
         }
     }
 }

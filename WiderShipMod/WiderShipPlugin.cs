@@ -37,6 +37,9 @@ namespace WiderShipMod
         public static bool is2StoryHere = false;
         public static bool isShipWindowsHere = false;
 
+        internal static GameObject[] windowGOs = new GameObject[3];
+        internal static GameObject[] vanilaGOs = new GameObject[3];
+
         void Awake()
         {
             Instance = this;

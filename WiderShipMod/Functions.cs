@@ -119,6 +119,20 @@ namespace WiderShipMod
             GameObject.Destroy(vanilaPosters);
         }
 
+        public static void DisableAndSave()
+        {
+            WiderShipPlugin.windowGOs[0] = GameObject.Find("left_window");
+            WiderShipPlugin.windowGOs[1] = GameObject.Find("right_window");
+            WiderShipPlugin.windowGOs[2] = GameObject.Find("floor_window");
+
+            WiderShipPlugin.vanilaGOs[0] = GameObject.Find("left_vanila");
+            WiderShipPlugin.vanilaGOs[1] = GameObject.Find("right_vanila");
+            WiderShipPlugin.vanilaGOs[2] = GameObject.Find("floor_vanila");
+
+            foreach (GameObject go in WiderShipPlugin.windowGOs)
+                go.SetActive(false);
+        }
+
         public static void CreateShip()
         {
             //network stuff for walls here somewhere or in other place? . . .
@@ -145,6 +159,8 @@ namespace WiderShipMod
                         break;
                     }
             }
+
+            DisableAndSave();
 
             DestroyStuff();
         }

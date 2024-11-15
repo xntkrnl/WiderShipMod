@@ -8,6 +8,7 @@ namespace WiderShipMod.Patches
 {
     public class WiderShipPatches
     {
+        [HarmonyAfter("TestAccount666.ShipWindows")]
         [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
         static void StartPatch()
         {

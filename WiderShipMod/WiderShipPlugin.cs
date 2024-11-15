@@ -6,11 +6,14 @@ using System.Reflection;
 using UnityEngine;
 using BepInEx.Configuration;
 using WiderShipMod.Patches;
+using WiderShipMod.Compatibility;
+using WiderShipMod.Compatibility.ShipWindows;
 
 
 namespace WiderShipMod
 {
     [BepInDependency("MelanieMelicious.2StoryShip", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("TestAccount666.ShipWindows", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(modGUID, modName, modVersion)]
     public class WiderShipPlugin : BaseUnityPlugin
     {
@@ -32,6 +35,7 @@ namespace WiderShipMod
         private static WiderShipPlugin Instance;
 
         public static bool is2StoryHere = false;
+        public static bool isShipWindowsHere = false;
 
         void Awake()
         {
@@ -53,6 +57,13 @@ namespace WiderShipMod
                 mls.LogMessage("Hi Mel, ñan you do all the hard work for me since 2StoryShip here?");
                 harmony.PatchAll(typeof(LightPatches));
                 return; //melanie only needs lamps and light patch
+            }
+
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindows"))
+            {
+                mls.LogMessage("Hi TestAccount666.");
+                isShipWindowsHere = true;
+                harmony.PatchAll(typeof(ShipWindowsPatches));
             }
 
             harmony.PatchAll(typeof(WiderShipPatches));

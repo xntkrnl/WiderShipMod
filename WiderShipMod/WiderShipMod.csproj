@@ -40,6 +40,9 @@
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\Default\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
+    <Reference Include="ShipWindows_publicized">
+      <HintPath>bin\Debug\publicized_assemblies\ShipWindows_publicized.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,6 +72,8 @@
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
+    <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Patches\Patches.cs" />
     <Compile Include="Patches\LightPatches.cs" />

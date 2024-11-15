@@ -108,7 +108,8 @@ namespace WiderShipMod
 
         public static void DestroyStuff()
         {
-            GameObject.Destroy(vanilaSI);
+            //GameObject.Destroy(vanilaSI);
+            vanilaSI.SetActive(false);
             GameObject.Destroy(vanilaSR);
             GameObject.Destroy(vanilaSRP);
             GameObject.Destroy(vanilaCatwalk);

@@ -5,14 +5,8 @@ using UnityEngine;
 
 namespace WiderShipMod.Compatibility.ShipWindows
 {
-    internal class ShipWindowsPatches : MonoBehaviour
+    internal class ShipWindowsPatches
     {
-        [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "Start")]
-        static void WindowsStartPatch()
-        {
-
-        }
-
         [HarmonyPostfix, HarmonyPatch(typeof(ShipReplacer), "ReplaceShip")]
         public static void ReplaceShipPatch()
         {

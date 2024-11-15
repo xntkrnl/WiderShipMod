@@ -34,16 +34,41 @@ namespace WiderShipMod.Compatibility.ShipWindows
             ObjFunctions.SetAnglesObj(window.name, new Vector3(0f, 0f, 62.2f), "");
         }
 
-        public static void ReParentWindows(string name)
+        public static void ParentWindows(string name)
         {
             var oldWindowContainer = GameObject.Find($"{name}/WindowContainer");
-            WiderShipPlugin.mls.LogInfo("1");
-            if (oldWindowContainer != null)
-                GameObject.Destroy(oldWindowContainer);
+            var newWindowContainer = GameObject.Find("ShipInside/WindowContainer");
 
-            WiderShipPlugin.mls.LogInfo("2");
-            ObjFunctions.SetChildObjToParentObj("WindowContainer", name, "Environment/HangarShip/ShipInside/", "Environment/HangarShip/");
-            WiderShipPlugin.mls.LogInfo("3");
+            if (oldWindowContainer == null)
+            {
+                newWindowContainer.transform.SetParent(GameObject.Find($"{name}").transform);
+                return;
+            }
+            else
+            {
+                bool skip;
+                foreach (Transform window in newWindowContainer.transform)
+                {
+                    skip = false;
+                    foreach (Transform window_ in oldWindowContainer.transform)
+                    {
+                        if (window.name == window_.name)
+                        {
+                            skip = true;
+                            break;
+                        }
+                    }
+
+                    if (skip)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        window.SetParent(oldWindowContainer.transform);
+                    }
+                }
+            }
         }
 
         public static void RemoveSWShip()
@@ -70,7 +95,7 @@ namespace WiderShipMod.Compatibility.ShipWindows
 
         public static IEnumerator DoWindows()
         {
-            yield return new WaitForEndOfFrame();
+            //yield return new WaitForEndOfFrame();
             try
             {
                 window1 = GameObject.Find("Window1");
@@ -78,9 +103,7 @@ namespace WiderShipMod.Compatibility.ShipWindows
                 window3 = GameObject.Find("Window3");
                 var ship = GetShipGO();
 
-                WiderShipPlugin.mls.LogInfo($"0 - {GetShipGO()}");
-                WiderShipPlugin.mls.LogInfo($"{ship.name}");
-                ReParentWindows(ship.name);
+                ParentWindows(ship.name);
 
                 if (window1 != null)
                 {
@@ -114,6 +137,7 @@ namespace WiderShipMod.Compatibility.ShipWindows
             }
 
             RemoveSWShip();
+            yield return new WaitForEndOfFrame();
             //im going insane
         }
     }

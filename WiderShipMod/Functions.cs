@@ -168,7 +168,7 @@ namespace WiderShipMod
             ///Lamps
             string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (9)" };
             foreach (string lamp in lamps)
-                ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/");
+                ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";
 
             ///ShipInnerRoomBoundsTrigger
             ObjFunctions.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -9.1742f), "Environment/HangarShip/");
@@ -193,11 +193,11 @@ namespace WiderShipMod
             ObjFunctions.MoveObjToPoint("OutsideShip (1)", new Vector3(-2.519711f, 0f, -3.763971f), "Environment/HangarShip/ReverbTriggers/");
             ObjFunctions.ScaleObj("OutsideShip (1)", new Vector3(2.4f, 1.7614f, 1.064288f), "Environment/HangarShip/ReverbTriggers/");
 
-            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-5.030502f, 3.2812f, -1.4f), "Environment/HangarShip/ReverbTriggers/");
-            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(0.8544563f, 12.2338f, 15.21f), "Environment/HangarShip/ReverbTriggers/");
+            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-5.030502f, 3.2812f, -1.4f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(0.8544563f, 12.2338f, 15.21f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
-            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-1.187546f, 3.2812f, -8.83f), "Environment/HangarShip/ReverbTriggers/");
-            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(5.967689f, 12.2338f, 0.8325825f), "Environment/HangarShip/ReverbTriggers/");
+            ObjFunctions.MoveObjToPoint("LeavingShip (3)", new Vector3(-1.187546f, 3.2812f, -8.83f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+            ObjFunctions.ScaleObj("LeavingShip (3)", new Vector3(5.967689f, 12.2338f, 0.8325825f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
             ///Vent
             ObjFunctions.MoveObjToPoint("VentEntrance", new Vector3(1.5f, 1f, -4.25f), "Environment/HangarShip/");
@@ -225,9 +225,7 @@ namespace WiderShipMod
             ObjFunctions.ScaleObj("ShipBoundsTrigger", new Vector3(23.75926f, 10.11447f, 14f), "Environment/HangarShip/");
 
             ///AnimatedShipDoor
-            ObjFunctions.MoveObj("AnimatedShipDoor", new Vector3(-0.25f, 0f, 0f), "Environment/HangarShip/");
-
-            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(-5.335f, 2.188215f, -4.323f), "Environment/HangarShip/AnimatedShipDoor/");
+            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(-5.59f, 2.188215f, -4.323f), "Environment/HangarShip/AnimatedShipDoor/");
             ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, 0f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
 
             ///SingleScreen
@@ -282,7 +280,6 @@ namespace WiderShipMod
             ObjFunctions.ScaleObj("LeavingShip (3)", new Vector3(2.983845f, 12.2338f, 0.8325825f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
             ///WallInsulator
-            ///Not sure why we need this collider
             GameObject.Find("Environment/HangarShip/WallInsulator2").SetActive(false);
             GameObject.Find("Environment/HangarShip/WallInsulator").SetActive(false);
 
@@ -353,15 +350,16 @@ namespace WiderShipMod
             ObjFunctions.RotateObj("Cube.005 (1)", Vector3.up, "Environment/HangarShip/ShipModels2b/", 180f);
 
             ///LadderShort (1)
-            ObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-9f, -2.58f, -14.562f), "Environment/HangarShip/");
+            ObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-6.93f, -2.58f, -16.156f), "Environment/HangarShip/");
 
             ///LadderShort
             ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(7.868f, -2.58f, 1.116f), "Environment/HangarShip/");
             ObjFunctions.SetAnglesObj("LadderShort", new Vector3(0f, 120f, 0f), "Environment/HangarShip/");
 
             ///AnimatedShipDoor
-            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(6.412f, 2.546f, -3.328f), "Environment/HangarShip/AnimatedShipDoor/");
-            ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, 0f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
+            //TODO: redo door panel
+            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(-6.458f, 2.546f, -8.504f), "Environment/HangarShip/AnimatedShipDoor/");
+            ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, -90f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
         }
 
         public static void CreateRightSide()
@@ -370,10 +368,66 @@ namespace WiderShipMod
             moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Right.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
             ship.transform.localPosition = Vector3.zero;
-            moddedPoster.transform.localPosition = new Vector3(-8.34465e-07f, 2.157811f, -5.229f);
+            moddedPoster.transform.localPosition = new Vector3(6.913f, 2.157811f, -9.453f);
 
             ///Railing (collider)
             GameObject.Destroy(GameObject.Find("HangarShip/Railing"));
+
+            ///Cube.005 & 006
+            ObjFunctions.MoveObjToPoint("Cube.005", new Vector3(5.027f, 3.469644f, -2.696f), "Environment/HangarShip/");
+            ObjFunctions.MoveObjToPoint("Cube.006", new Vector3(4.724743f, 3.469644f, -2.696f), "Environment/HangarShip/");
+
+            ///ReverbTrigers(Not all)
+            string[] triggers = new string[2] { "ShipDoorClosed", "ShipDoorOpened" };
+            foreach (string trigger in triggers)
+            {
+                ObjFunctions.MoveObjToPoint(trigger, new Vector3(7.3f, 0f, 2.4f), "Environment/HangarShip/ReverbTriggers/");
+                ObjFunctions.ScaleObj(trigger, new Vector3(16f, 1.76f, 10.5f), "Environment/HangarShip/ReverbTriggers/");
+            }
+
+            ///OutsideShipRoom
+            ObjFunctions.MoveObj("OutsideShipRoom", new Vector3(0f, 0f, 5f), "Environment/HangarShip/");
+
+            ///Light & (2)
+            ObjFunctions.MoveObjToPoint("Light", new Vector3(-8.672f, 3.13f, -3.295f), "Environment/HangarShip/ShipModels2b/");
+            ObjFunctions.SetAnglesObj("Light", new Vector3(-90f, 0f, -120f), "Environment/HangarShip/ShipModels2b/");
+            ObjFunctions.MoveObjToPoint("Light (2)", new Vector3(-9.911f, 3.25f, -11.063f), "Environment/HangarShip/ShipModels2b/");
+
+            ///LeavingShip
+            ObjFunctions.MoveObjToPoint("LeavingShip (1)", new Vector3(0.8309021f, 3.2812f, 11.34f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+            ObjFunctions.MoveObjToPoint("LeavingShip (4)", new Vector3(13.72397f, 3.2812f, 12.72f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+
+            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-5.030502f, 3.2812f, 2.8f), "Environment/HangarShip/ReverbTriggers/");
+            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(0.8544563f, 12.2338f, 15.21f), "Environment/HangarShip/ReverbTriggers/");
+
+            ///OutsideShip
+            ObjFunctions.MoveObjToPoint("OutsideShip (2)", new Vector3(2.304527f, 3.1895f, 8.89f), "Environment/HangarShip/ReverbTriggers/");
+            ObjFunctions.MoveObjToPoint("OutsideShip (3)", new Vector3(14.13f, 3.1895f, 6.08f), "Environment/HangarShip/ReverbTriggers/");
+
+            ///Ladder Short
+            ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(7.868f, -2.58f, 1.116f), "Environment/HangarShip/");
+            ObjFunctions.SetAnglesObj("LadderShort", new Vector3(0f, 120f, 0f), "Environment/HangarShip/");
+
+            ///Cube.005 (2) & (1)
+            ObjFunctions.MoveObjToPoint("Cube.005 (2)", new Vector3(-5.92f, 1.907f, -1.103f), "Environment/HangarShip/ShipModels2b/");
+            ObjFunctions.MoveObjToPoint("Cube.005 (1)", new Vector3(0.674f, 2.757f, -0.221f), "Environment/HangarShip/ShipModels2b/");
+            ObjFunctions.RotateObj("Cube.005 (1)", Vector3.up, "Environment/HangarShip/ShipModels2b/", 180f);
+
+            ///ShipBoundsTrigger
+            ObjFunctions.MoveObjToPoint("ShipBoundsTrigger", new Vector3(1.4908f, 4.1675f, -4.657f), "Environment/HangarShip/");
+            ObjFunctions.ScaleObj("ShipBoundsTrigger", new Vector3(23.75926f, 10.11447f, 14f), "Environment/HangarShip/");
+
+            ///ShipInnerRoomBoundsTrigger
+            ObjFunctions.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -3.9242f), "Environment/HangarShip/");
+            ObjFunctions.ScaleObj("ShipInnerRoomBoundsTrigger", new Vector3(17.52326f, 5.341722f, 11f), "Environment/HangarShip/");
+
+            ///WallInsulator
+            GameObject.Find("Environment/HangarShip/WallInsulator").SetActive(false);
+
+            ///Lamps
+            string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
+            foreach (string lamp in lamps)
+                ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
         }
     }
 }

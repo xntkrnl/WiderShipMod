@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 
-namespace WiderShipMod
+namespace WiderShipMod.Patches
 {
     public class WiderShipPatches
     {
@@ -13,43 +13,6 @@ namespace WiderShipMod
         {
             ShipPartsFunctions.Init();
             ShipPartsFunctions.CreateShip();
-
-            //--------------------------------------
-            //TODO: need to move it to another start() patch
-            WiderShipPlugin.lampMaterials = GameObject.Find("Environment/HangarShip/ShipElectricLights/HangingLamp (3)").GetComponent<MeshRenderer>().materials;
-            WiderShipPlugin.bulbOnMaterial = WiderShipPlugin.lampMaterials[3];
-            WiderShipPlugin.bulbOffMaterial = WiderShipPlugin.lampMaterials[0];
-            //--------------------------------------
-        }
-
-        [HarmonyPrefix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
-        static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
-        {
-            var ShipElectricLight = GameObject.Find("Environment/HangarShip/ShipElectricLights").transform;
-
-            if (___areLightsOn)
-                ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOnMaterial;
-            else
-                ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOffMaterial;
-
-            foreach (Transform child in ShipElectricLight)
-            {
-                var light = child.GetComponent<Light>();
-                if (light != null)
-                {
-                    light.enabled = ___areLightsOn;
-                    continue;
-                }
-
-                var meshRenderer = child.GetComponent<MeshRenderer>();
-                if (meshRenderer != null)
-                {
-                    meshRenderer.materials = ShipPartsFunctions.lampMaterials;
-                    continue;
-                }
-
-                WiderShipPlugin.mls.LogDebug($"Huh? What is {child.name} ? Send this to Wider Ship dev please :)");
-            }
         }
 
         /*[HarmonyPostfix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]

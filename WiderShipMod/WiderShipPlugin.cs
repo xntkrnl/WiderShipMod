@@ -5,17 +5,19 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 using BepInEx.Configuration;
+using WiderShipMod.Patches;
 
 
 namespace WiderShipMod
 {
+    [BepInDependency("MelanieMelicious.2StoryShip", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(modGUID, modName, modVersion)]
     public class WiderShipPlugin : BaseUnityPlugin
     {
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.2.5";
+        private const string modVersion = "1.3.0";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -29,6 +31,8 @@ namespace WiderShipMod
 
         private static WiderShipPlugin Instance;
 
+        public static bool is2StoryHere = false;
+
         void Awake()
         {
             Instance = this;
@@ -37,20 +41,22 @@ namespace WiderShipMod
             mls = BepInEx.Logging.Logger.CreateLogSource("Wider Ship Mod");
             mls = Logger;
 
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MelanieMelicious.2StoryShip"))
-            {
-                mls.LogMessage("Hi Mel, ñan you do all the hard work for me since 2StoryShip here?");
-                return; //nothing is patched
-            }
-
             if (!LoadAssetBundle())
             {
                 mls.LogError("Failed to load asset bundle! Abort mission!");
                 return;
             }
-
             mls.LogInfo("Wider Ship Mod loaded. Patching.");
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MelanieMelicious.2StoryShip"))
+            {
+                is2StoryHere = true;
+                mls.LogMessage("Hi Mel, ñan you do all the hard work for me since 2StoryShip here?");
+                harmony.PatchAll(typeof(LightPatches));
+                return; //melanie only needs lamps and light patch
+            }
+
             harmony.PatchAll(typeof(WiderShipPatches));
+            harmony.PatchAll(typeof(LightPatches));
 
             bool LoadAssetBundle()
             {

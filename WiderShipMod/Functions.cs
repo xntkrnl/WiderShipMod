@@ -244,7 +244,7 @@ namespace WiderShipMod
             moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Both.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
             ship.transform.localPosition = Vector3.zero;
-            moddedPoster.transform.localPosition = new Vector3(-8.34465e-07f, 2.157811f, -5.229f);
+            moddedPoster.transform.localPosition = new Vector3(6.913f, 2.157811f, -9.453f);
 
             ///Railing (collider)
             GameObject.Destroy(GameObject.Find("HangarShip/Railing"));
@@ -358,8 +358,8 @@ namespace WiderShipMod
 
             ///AnimatedShipDoor
             //TODO: redo door panel
-            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(-6.458f, 2.546f, -8.504f), "Environment/HangarShip/AnimatedShipDoor/");
-            ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, -90f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
+            ObjFunctions.MoveObjToPoint("HangarDoorButtonPanel", new Vector3(6.412f, 2.546f, -3.328f), "Environment/HangarShip/AnimatedShipDoor/");
+            ObjFunctions.SetAnglesObj("HangarDoorButtonPanel", new Vector3(90f, 0f, 0f), "Environment/HangarShip/AnimatedShipDoor/");
         }
 
         public static void CreateRightSide()
@@ -397,8 +397,8 @@ namespace WiderShipMod
             ObjFunctions.MoveObjToPoint("LeavingShip (1)", new Vector3(0.8309021f, 3.2812f, 11.34f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
             ObjFunctions.MoveObjToPoint("LeavingShip (4)", new Vector3(13.72397f, 3.2812f, 12.72f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
-            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-5.030502f, 3.2812f, 2.8f), "Environment/HangarShip/ReverbTriggers/");
-            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(0.8544563f, 12.2338f, 15.21f), "Environment/HangarShip/ReverbTriggers/");
+            ObjFunctions.MoveObjToPoint("LeavingShip (2)", new Vector3(-5.030502f, 3.2812f, 2.8f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
+            ObjFunctions.ScaleObj("LeavingShip (2)", new Vector3(0.8544563f, 12.2338f, 15.21f), "Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/");
 
             ///OutsideShip
             ObjFunctions.MoveObjToPoint("OutsideShip (2)", new Vector3(2.304527f, 3.1895f, 8.89f), "Environment/HangarShip/ReverbTriggers/");

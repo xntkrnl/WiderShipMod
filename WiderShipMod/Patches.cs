@@ -13,6 +13,13 @@ namespace WiderShipMod
         {
             ShipPartsFunctions.Init();
             ShipPartsFunctions.CreateShip();
+
+            //--------------------------------------
+            //TODO: need to move it to another start() patch
+            WiderShipPlugin.lampMaterials = GameObject.Find("Environment/HangarShip/ShipElectricLights/HangingLamp (3)").GetComponent<MeshRenderer>().materials;
+            WiderShipPlugin.bulbOnMaterial = WiderShipPlugin.lampMaterials[3];
+            WiderShipPlugin.bulbOffMaterial = WiderShipPlugin.lampMaterials[0];
+            //--------------------------------------
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]

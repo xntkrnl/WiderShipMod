@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace WiderShipMod.Patches
 {
+    //This class exist only for 2StoryShip
     public class LightPatches
     {
         [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]

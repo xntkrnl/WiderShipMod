@@ -48,6 +48,8 @@ namespace WiderShipMod
             mls = BepInEx.Logging.Logger.CreateLogSource("Wider Ship Mod");
             mls = Logger;
 
+            WiderShipConfig.example.Value = "220 Assurance,5 Embrion,44 Atlantica,46 Infernis,134 Oldred,154 Etern";
+
             if (!LoadAssetBundle())
             {
                 mls.LogError("Failed to load asset bundle! Abort mission!");

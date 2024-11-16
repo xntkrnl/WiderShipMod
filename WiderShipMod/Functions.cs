@@ -373,7 +373,7 @@ namespace WiderShipMod
             ObjFunctions.MoveObjToPoint("LadderShort (1)", new Vector3(-6.93f, -2.58f, -16.156f), "Environment/HangarShip/");
 
             ///LadderShort
-            ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(7.868f, -2.58f, 1.116f), "Environment/HangarShip/");
+            ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(6.568f, -2.58f, 2f), "Environment/HangarShip/");
             ObjFunctions.SetAnglesObj("LadderShort", new Vector3(0f, 120f, 0f), "Environment/HangarShip/");
 
             ///AnimatedShipDoor
@@ -425,7 +425,7 @@ namespace WiderShipMod
             ObjFunctions.MoveObjToPoint("OutsideShip (3)", new Vector3(14.13f, 3.1895f, 6.08f), "Environment/HangarShip/ReverbTriggers/");
 
             ///Ladder Short
-            ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(7.868f, -2.58f, 1.116f), "Environment/HangarShip/");
+            ObjFunctions.MoveObjToPoint("LadderShort", new Vector3(6.568f, -2.58f, 2f), "Environment/HangarShip/");
             ObjFunctions.SetAnglesObj("LadderShort", new Vector3(0f, 120f, 0f), "Environment/HangarShip/");
 
             ///Cube.005 (2) & (1)

@@ -14,6 +14,8 @@ namespace WiderShipMod
         internal static ConfigEntry<Side> extendedSide;
         internal static ConfigEntry<bool> enableWarning;
 
+        internal static ConfigEntry<bool> enableForceDontMovePosters;
+
         internal static ConfigEntry<bool> enableLeftInnerWall;
         internal static ConfigEntry<bool> enableLeftInnerWallSolidMode;
 
@@ -26,6 +28,10 @@ namespace WiderShipMod
                 "Left - only left side;\nRight - only right side;\nBoth - both sides.");
             enableWarning = cfg.Bind("General", "Enable Warning", true,
                 "Enable if you want to know when to expect more bugs lol.");
+
+            enableForceDontMovePosters = cfg.Bind("Compatibility", "Force Dont move posters to true", true,
+                "Force \"Don't move posters\" to true so that the posters don't hang in the middle of the ship.\n" +
+                "It probably won't matter in the future if TestAccount666 makes DontMovePosters true by default");
 
             enableLeftInnerWall = cfg.Bind("Left Part", "Enable Left Inner Wall", true,
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");

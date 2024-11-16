@@ -12,7 +12,7 @@ namespace WiderShipMod
     internal class WiderShipConfig
     {
         internal static ConfigEntry<Side> extendedSide;
-        internal static ConfigEntry<bool> enableWarning;
+        //internal static ConfigEntry<bool> enableWarning;
 
         internal static ConfigEntry<bool> enableForceDontMovePosters;
 
@@ -31,8 +31,8 @@ namespace WiderShipMod
         {
             extendedSide = cfg.Bind("General", "Extended Side", Side.Both,
                 "Left - only left side.\nRight - only right side.\nBoth - both sides.");
-            enableWarning = cfg.Bind("General", "Enable Warning", true,
-                "Enable if you want to know when to expect more bugs lol.");
+            //enableWarning = cfg.Bind("General", "Enable Warning", true,
+            //    "Enable if you want to know when to expect more bugs lol.");
 
             enableForceDontMovePosters = cfg.Bind("Compatibility", "Force Dont move posters to true", true,
                 "Force \"Don't move posters\" to true so that the posters don't hang in the middle of the ship.\n" +

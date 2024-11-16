@@ -14,6 +14,8 @@ namespace WiderShipMod.Patches
         [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
         static void StartLightPatch()
         {
+            ShipPartsFunctions.Init();
+
             WiderShipPlugin.lampMaterials = GameObject.Find("Environment/HangarShip/ShipElectricLights/HangingLamp (3)").GetComponent<MeshRenderer>().materials;
             WiderShipPlugin.bulbOnMaterial = WiderShipPlugin.lampMaterials[3];
             WiderShipPlugin.bulbOffMaterial = WiderShipPlugin.lampMaterials[0];

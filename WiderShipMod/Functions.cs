@@ -492,4 +492,6 @@ namespace WiderShipMod
 
         }
     }
+
+    //TODO: separate .cs for classes
 }

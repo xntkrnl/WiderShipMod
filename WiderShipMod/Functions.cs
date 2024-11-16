@@ -447,4 +447,49 @@ namespace WiderShipMod
                 ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
         }
     }
+
+    public class NavmeshFunctions
+    {
+        public static GameObject navmesh;
+        internal static string GetNavmeshName()
+        {
+            switch (WiderShipConfig.extendedSide.Value)
+            {
+                case Side.Left:
+                    return "navmesh_left.prefab";
+
+                case Side.Right:
+                    return "navmesh_right.prefab";
+
+                case Side.Both:
+                    return "navmesh_both.prefab";
+            }
+
+            return null;
+        }
+
+        public static void PlaceNavmesh()
+        {
+            GameObject oldNavmesh = GameObject.Find("NavMeshColliders");
+            GameObject oldNavmeshChild = GameObject.Find("PlayerShipNavmesh");
+
+            foreach (Transform child in oldNavmeshChild.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+
+            foreach (Transform child in oldNavmesh.transform)
+            {
+                foreach (Transform child2 in child.transform)
+                {
+                    if (child2.gameObject.name.Contains("ShipLadder"))
+                        GameObject.Destroy(child2.gameObject);
+                }
+            }
+
+            navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName()) as GameObject, oldNavmesh.transform);
+            navmesh.transform.localPosition = new Vector3(17.45f, -7.6f, 16f);
+
+        }
+    }
 }

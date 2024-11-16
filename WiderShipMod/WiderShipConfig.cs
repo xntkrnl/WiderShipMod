@@ -24,7 +24,6 @@ namespace WiderShipMod
 
         internal static ConfigEntry<bool> enableBuildNewNavmesh;
         internal static ConfigEntry<bool> enableClientBuildNavmeshToo;
-        internal static ConfigEntry<bool> enableIgnoreLists;
         internal static ConfigEntry<string> whitelist;
         internal static ConfigEntry<string> blacklist;
         internal static ConfigEntry<string> example;
@@ -53,9 +52,6 @@ namespace WiderShipMod
             enableBuildNewNavmesh = cfg.Bind("Navmesh", "Enable New Navmesh", true,
                 "Enable this to generate new navmesh (YOU DON't WANT THIS TO BE FALSE!!!)\n" +
                 "Only for testing purposes.");
-            enableIgnoreLists = cfg.Bind("Navmesh", "Ignore whitelist or blacklist", true,
-                "Enable this to ignore whitelist/blacklist and always CREATE a navmesh\n" +
-                "Old method of creating navmeshes");
             enableClientBuildNavmeshToo = cfg.Bind("Navmesh", "Enable Client Build Navmesh Too", false,
                 "Enable this if you (as a client) want to generate navmesh.\n" +
                 "It won't speed up map loading, but will most likely slow it down for everyone.\n" +

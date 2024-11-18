@@ -20,7 +20,7 @@ namespace WiderShipMod
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.3.0";
+        private const string modVersion = "1.3.3";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -35,7 +35,7 @@ namespace WiderShipMod
         private static WiderShipPlugin Instance;
 
         public static bool is2StoryHere = false;
-        public static bool isShipWindowsHere = false;
+        //public static bool isShipWindowsHere = false;
 
         internal static GameObject[] windowGOs = new GameObject[3];
         internal static GameObject[] vanilaGOs = new GameObject[3];
@@ -67,7 +67,7 @@ namespace WiderShipMod
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindows"))
             {
                 mls.LogMessage("Hi TestAccount666.");
-                isShipWindowsHere = true;
+                //isShipWindowsHere = true;
                 harmony.PatchAll(typeof(ShipWindowsPatches));
             }
 

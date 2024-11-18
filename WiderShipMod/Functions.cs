@@ -137,28 +137,28 @@ namespace WiderShipMod
         public static void CreateShip()
         {
             //too lazy to move all this stuff on net2.1 so no networking for walls (AT LEAST FOR NOW)
-            string shipSide = ":P";
+            //string shipSide = ":P";
 
             switch (WiderShipConfig.extendedSide.Value)
             {
                 case Side.Left:
                     {
                         CreateLeftSide();
-                        shipSide = "ShipLeft(Clone)";
+                        //shipSide = "ShipLeft(Clone)";
                         break;
                     }
 
                 case Side.Right:
                     {
                         CreateRightSide();
-                        shipSide = "ShipRight(Clone)";
+                        //shipSide = "ShipRight(Clone)";
                         break;
                     }
 
                 case Side.Both:
                     {
                         CreateBothSides();
-                        shipSide = "ShipBoth(Clone)";
+                        //shipSide = "ShipBoth(Clone)";
                         break;
                     }
             }
@@ -171,7 +171,6 @@ namespace WiderShipMod
         public static void CreateLeftSide()
         {
             //thank god i made left side in 1.0.0
-            //TODO: other sides, posters, and many many more :pensive:
 
             var ship = ObjFunctions.CreateShipObj(vanilaSI, "ShipLeft.prefab", vanilaSI.layer, vanilaSI.tag);
             moddedPoster = ObjFunctions.CreateShipObj(vanilaPosters, "Plane.001Left.fbx", vanilaPosters.layer, vanilaPosters.tag);
@@ -481,7 +480,6 @@ namespace WiderShipMod
 
     public class NavmeshFunctions
     {
-        public static GameObject navmesh;
         internal static string GetNavmeshName()
         {
             switch (WiderShipConfig.extendedSide.Value)
@@ -504,9 +502,16 @@ namespace WiderShipMod
             GameObject oldNavmesh = GameObject.Find("NavMeshColliders");
             GameObject oldNavmeshChild = GameObject.Find("PlayerShipNavmesh");
 
+            var navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName()) as GameObject, oldNavmesh.transform);
+            navmesh.transform.localPosition = new Vector3(17.55f, -7.6f, 16.7f);
+
+            //thanks melanie for finding it in my old code
             foreach (Transform child in oldNavmeshChild.transform)
             {
-                child.gameObject.SetActive(false);
+                if (child.gameObject.GetComponent<NavMeshModifier>())
+                    child.gameObject.SetActive(false);
+                else
+                    child.SetParent(navmesh.transform);
             }
 
             foreach (Transform child in oldNavmesh.transform)
@@ -517,10 +522,6 @@ namespace WiderShipMod
                         GameObject.Destroy(child2.gameObject);
                 }
             }
-
-            navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName()) as GameObject, oldNavmesh.transform);
-            navmesh.transform.localPosition = new Vector3(17.55f, -7.6f, 16.7f);
-
         }
     }
 

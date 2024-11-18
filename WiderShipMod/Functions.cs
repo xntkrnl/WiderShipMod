@@ -503,7 +503,7 @@ namespace WiderShipMod
             GameObject oldNavmeshChild = GameObject.Find("PlayerShipNavmesh");
 
             var navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName()) as GameObject, oldNavmesh.transform);
-            navmesh.transform.localPosition = new Vector3(17.55f, -7.6f, 16.7f);
+            navmesh.transform.position = Vector3.zero; //new Vector3(17.55f, -7.6f, 16.7f) //0,1111 0,0054 0,2287
 
             //thanks melanie for finding it in my old code
             foreach (Transform child in oldNavmeshChild.transform)

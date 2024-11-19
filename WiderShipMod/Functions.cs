@@ -485,13 +485,13 @@ namespace WiderShipMod
             switch (WiderShipConfig.extendedSide.Value)
             {
                 case Side.Left:
-                    return "navmesh_left.prefab";
+                    return "navmesh_left";
 
                 case Side.Right:
-                    return "navmesh_right.prefab";
+                    return "navmesh_right";
 
                 case Side.Both:
-                    return "navmesh_both.prefab";
+                    return "navmesh_both";
             }
 
             return null;
@@ -502,7 +502,16 @@ namespace WiderShipMod
             GameObject oldNavmesh = GameObject.Find("NavMeshColliders");
             GameObject oldNavmeshChild = GameObject.Find("PlayerShipNavmesh");
 
-            var navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName()) as GameObject, oldNavmesh.transform);
+            foreach (Transform child in oldNavmesh.transform)
+            {
+                foreach (Transform child2 in child.transform)
+                {
+                    if (child2.gameObject.name.Contains("ShipLadder"))
+                        GameObject.Destroy(child2.gameObject);
+                }
+            }
+
+            var navmesh = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset(GetNavmeshName() + ".prefab") as GameObject, oldNavmesh.transform);
             navmesh.transform.position = Vector3.zero; //new Vector3(17.55f, -7.6f, 16.7f) //0,1111 0,0054 0,2287
 
             //thanks melanie for finding it in my old code
@@ -514,14 +523,13 @@ namespace WiderShipMod
                     child.SetParent(navmesh.transform);
             }
 
-            foreach (Transform child in oldNavmesh.transform)
+            var newOffmesh = GameObject.Find($"{GetNavmeshName()}(Clone)/OffMeshLinks").transform;
+            foreach (Transform child in newOffmesh.transform)
             {
-                foreach (Transform child2 in child.transform)
-                {
-                    if (child2.gameObject.name.Contains("ShipLadder"))
-                        GameObject.Destroy(child2.gameObject);
-                }
+                if (child.GetComponent<OffMeshLink>())
+                    child.GetComponent<OffMeshLink>().UpdatePositions();
             }
+
         }
     }
 

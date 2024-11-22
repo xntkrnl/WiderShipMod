@@ -74,7 +74,9 @@
   <ItemGroup>
     <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
-    <Compile Include="Functions.cs" />
+    <Compile Include="Methods\ObjMethods.cs" />
+    <Compile Include="Methods\Navmesh.cs" />
+    <Compile Include="Methods\ShipSides.cs" />
     <Compile Include="Patches\Patches.cs" />
     <Compile Include="Patches\LightPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

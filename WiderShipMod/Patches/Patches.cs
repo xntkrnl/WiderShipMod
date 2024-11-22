@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
 using System.Linq;
+using WiderShipMod.Methods;
 
 namespace WiderShipMod.Patches
 {
@@ -16,8 +17,8 @@ namespace WiderShipMod.Patches
         [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
         static void StartPatch()
         {
-            ShipPartsFunctions.Init();
-            ShipPartsFunctions.CreateShip();
+            ShipSidesMethods.Init();
+            ShipSidesMethods.CreateShip();
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]
@@ -36,7 +37,7 @@ namespace WiderShipMod.Patches
                 WiderShipConfig.whitelist.Value += $",{TimeOfDay.Instance.currentLevel.PlanetName}";
             }
 
-            NavmeshFunctions.PlaceNavmesh();
+            NavmeshMethods.PlaceNavmesh();
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(RoundManager), "FinishGeneratingLevel")]

@@ -1,10 +1,6 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+using WiderShipMod.Methods;
 
 namespace WiderShipMod.Patches
 {
@@ -14,7 +10,7 @@ namespace WiderShipMod.Patches
         [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
         static void StartLightPatch()
         {
-            ShipPartsFunctions.Init();
+            ShipSidesMethods.Init();
 
             WiderShipPlugin.lampMaterials = GameObject.Find("Environment/HangarShip/ShipElectricLights/HangingLamp (3)").GetComponent<MeshRenderer>().materials;
             WiderShipPlugin.bulbOnMaterial = WiderShipPlugin.lampMaterials[3];
@@ -24,14 +20,14 @@ namespace WiderShipMod.Patches
             {
                 string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
                 foreach (string lamp in lamps)
-                    ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";
+                    ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";
             }
 
             if (WiderShipConfig.extendedSide.Value == Side.Right || WiderShipConfig.extendedSide.Value == Side.Both || WiderShipPlugin.is2StoryHere)
             {
                 string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
                 foreach (string lamp in lamps)
-                    ObjFunctions.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
+                    ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
             }
         }
 
@@ -41,9 +37,9 @@ namespace WiderShipMod.Patches
             var ShipElectricLight = GameObject.Find("Environment/HangarShip/ShipElectricLights").transform;
 
             if (___areLightsOn)
-                ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOnMaterial;
+                ShipSidesMethods.lampMaterials[3] = ShipSidesMethods.bulbOnMaterial;
             else
-                ShipPartsFunctions.lampMaterials[3] = ShipPartsFunctions.bulbOffMaterial;
+                ShipSidesMethods.lampMaterials[3] = ShipSidesMethods.bulbOffMaterial;
 
             foreach (Transform child in ShipElectricLight)
             {
@@ -57,7 +53,7 @@ namespace WiderShipMod.Patches
                 var meshRenderer = child.GetComponent<MeshRenderer>();
                 if (meshRenderer != null)
                 {
-                    meshRenderer.materials = ShipPartsFunctions.lampMaterials;
+                    meshRenderer.materials = ShipSidesMethods.lampMaterials;
                     continue;
                 }
 

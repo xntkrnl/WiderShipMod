@@ -29,9 +29,9 @@ namespace WiderShipMod.Compatibility.ShipWindows
 
         public static void MoveScaleRotate(GameObject window)
         {
-            ObjFunctions.MoveObjToPoint(window.name, new Vector3(3.6188f, -3.9069f, 1.37f), ""); //3,6188 -3,9069 1,37 local
-            ObjFunctions.ScaleObj(window.name, new Vector3(1f, 0.3f, 1f), "");
-            ObjFunctions.SetAnglesObj(window.name, new Vector3(0f, 0f, 62.2f), "");
+            ObjMethods.MoveObjToPoint(window.name, new Vector3(3.6188f, -3.9069f, 1.37f), ""); //3,6188 -3,9069 1,37 local
+            ObjMethods.ScaleObj(window.name, new Vector3(1f, 0.3f, 1f), "");
+            ObjMethods.SetAnglesObj(window.name, new Vector3(0f, 0f, 62.2f), "");
         }
 
         public static void ParentWindows(string name)

@@ -55,6 +55,7 @@ namespace WiderShipMod
                 mls.LogError("Failed to load asset bundle! Abort mission!");
                 return;
             }
+
             mls.LogInfo("Wider Ship Mod loaded. Patching.");
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MelanieMelicious.2StoryShip"))
             {

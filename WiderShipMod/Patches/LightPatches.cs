@@ -35,7 +35,7 @@ namespace WiderShipMod.Patches
             }
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
+        [HarmonyPostfix, HarmonyPatch(typeof(ShipLights), "SetShipLightsClientRpc"), HarmonyPatch(typeof(ShipLights), "ToggleShipLightsOnLocalClientOnly")]
         static void SetShipLightsClientRpcPatch(ref bool ___areLightsOn)
         {
             var ShipElectricLight = GameObject.Find("Environment/HangarShip/ShipElectricLights").transform;

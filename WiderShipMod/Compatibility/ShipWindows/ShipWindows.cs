@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using WiderShipMod.Methods;
 
 namespace WiderShipMod.Compatibility.ShipWindows
 {

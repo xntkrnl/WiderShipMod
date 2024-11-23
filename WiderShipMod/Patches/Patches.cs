@@ -52,7 +52,7 @@ namespace WiderShipMod.Patches
 
             if (whitelist.Contains(TimeOfDay.Instance.currentLevel.PlanetName))
             {
-                GameObject.Find("Environment").GetComponent<NavMeshSurface>().BuildNavMesh();
+                GameObject.FindGameObjectWithTag("OutsideLevelNavMesh").GetComponent<NavMeshSurface>().BuildNavMesh();
                 return;
             }
 

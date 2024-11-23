@@ -34,16 +34,16 @@ namespace WiderShipMod.Methods
                 {
                     if (child2.gameObject.name.Contains("ShipLadder"))
                     {
-                        if (child2.gameObject.name == "ShipLadder3" && WiderShipConfig.extendedSide.Value != Side.Left)
+                        if (child2.gameObject.name == "ShipLadder3")
                         {
-                            child2.position = new Vector3(24.91f, -4.78f, 12.48f);
-                            child2.gameObject.GetComponent<OffMeshLink>().UpdatePositions();
+                            if (WiderShipConfig.extendedSide.Value != Side.Left)
+                            {
+                                child2.position = new Vector3(24.91f, -4.78f, 12.48f);
+                                child2.gameObject.GetComponent<OffMeshLink>().UpdatePositions();
+                            }
                         }
+                        else GameObject.Destroy(child2.gameObject);
                     }
-                    else if (child2.gameObject.name == "Cube (6)")
-                        continue;
-
-                    GameObject.Destroy(child2.gameObject);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace WiderShipMod.Methods
             //thanks melanie for finding it in my old code
             foreach (Transform child in oldNavmeshChild.transform)
             {
-                if (child.gameObject.GetComponent<NavMeshModifier>())
+                if (child.gameObject.GetComponent<NavMeshModifier>() && child.name != "Cube (6)")
                     child.gameObject.SetActive(false);
                 else
                     child.SetParent(navmesh.transform);

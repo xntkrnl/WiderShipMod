@@ -16,10 +16,10 @@ namespace WiderShipMod
 
         internal static ConfigEntry<bool> enableForceDontMovePosters;
 
-        //internal static ConfigEntry<bool> enableLeftInnerWall;
-        //internal static ConfigEntry<bool> enableLeftInnerWallSolidMode;
-        //internal static ConfigEntry<bool> enableRightInnerWall;
-        //internal static ConfigEntry<bool> enableRightInnerWallSolidMode;
+        internal static ConfigEntry<bool> enableLeftInnerWall;
+        internal static ConfigEntry<bool> enableLeftInnerWallSolidMode;
+        internal static ConfigEntry<bool> enableRightInnerWall;
+        internal static ConfigEntry<bool> enableRightInnerWallSolidMode;
 
         internal static ConfigEntry<bool> enableBuildNewNavmesh;
         internal static ConfigEntry<bool> enableClientBuildNavmeshToo;
@@ -38,16 +38,15 @@ namespace WiderShipMod
                 "Force \"Don't move posters\" to true so that the posters don't hang in the middle of the ship.\n" +
                 "It probably won't matter in the future if TestAccount666 makes DontMovePosters true by default.");
 
-            /*enableLeftInnerWall = cfg.Bind("Walls", "Enable Left Inner Wall", true,
+            enableLeftInnerWall = cfg.Bind("Walls", "Enable Left Inner Wall", true,
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");
             enableLeftInnerWallSolidMode = cfg.Bind("Walls", "Solid Left Inner Wall", false,
                 "Enable this if you want your wall to be solid. Doesn't work without Left Inner Wall enabled.");
-
             enableRightInnerWall = cfg.Bind("Walls", "Enable Right Inner Wall", true,
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");
             enableRightInnerWallSolidMode = cfg.Bind("Walls", "Solid Right Inner Wall", false,
                 "Enable this if you want your wall to be solid. Doesn't work without Left Inner Wall enabled.");
-            */
+            
             enableBuildNewNavmesh = cfg.Bind("Navmesh", "Enable New Navmesh", true,
                 "Enable this to generate new navmesh (YOU DON't WANT THIS TO BE FALSE!!!)\n" +
                 "Only for testing purposes.");

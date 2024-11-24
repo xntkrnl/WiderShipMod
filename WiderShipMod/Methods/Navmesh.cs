@@ -58,6 +58,12 @@ namespace WiderShipMod.Methods
                 else
                     child.SetParent(navmesh.transform);
             }
+
+            //walls
+            if (!WiderShipConfig.enableLeftInnerWall.Value && WiderShipConfig.extendedSide.Value != Side.Right)
+                GameObject.Find($"{navmesh.name}/left_wall_navmesh").SetActive(false);
+            if (!WiderShipConfig.enableRightInnerWall.Value && WiderShipConfig.extendedSide.Value != Side.Left)
+                GameObject.Find($"{navmesh.name}/right_wall_navmesh").SetActive(false);
         }
     }
 }

@@ -8,6 +8,7 @@ using BepInEx.Configuration;
 using WiderShipMod.Patches;
 using WiderShipMod.Compatibility;
 using WiderShipMod.Compatibility.ShipWindows;
+using WiderShipMod.Compatibility.TwoStoryShip;
 
 
 namespace WiderShipMod
@@ -61,8 +62,8 @@ namespace WiderShipMod
             {
                 is2StoryHere = true;
                 mls.LogMessage("Hi Mel, ñan you do all the hard work for me since 2StoryShip here?");
-                harmony.PatchAll(typeof(LightPatches));
-                return; //melanie only needs lamps and light patch
+                TwoStoryShip.Init(harmony);
+                return;
             }
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindows"))

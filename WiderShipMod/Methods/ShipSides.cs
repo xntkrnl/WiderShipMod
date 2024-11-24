@@ -64,34 +64,28 @@ namespace WiderShipMod.Methods
 
         public static void CreateShip()
         {
-            //too lazy to move all this stuff on net2.1 so no networking for walls (AT LEAST FOR NOW)
-            //string shipSide = ":P";
-
             switch (WiderShipConfig.extendedSide.Value)
             {
                 case Side.Left:
                     {
                         CreateLeftSide();
-                        //shipSide = "ShipLeft(Clone)";
                         break;
                     }
 
                 case Side.Right:
                     {
                         CreateRightSide();
-                        //shipSide = "ShipRight(Clone)";
                         break;
                     }
 
                 case Side.Both:
                     {
                         CreateBothSides();
-                        //shipSide = "ShipBoth(Clone)";
                         break;
                     }
             }
 
-            //CreateWalls(shipSide);
+            Walls.CreateWalls();
             DisableAndSave();
             DestroyStuff();
         }
@@ -376,33 +370,5 @@ namespace WiderShipMod.Methods
             foreach (string lamp in lamps)
                 ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
         }
-
-        /*public static void CreateWalls(string ship)
-        {
-            var side = WiderShipConfig.extendedSide.Value;
-
-            if (side == Side.Left || side == Side.Both)
-            {
-                if (WiderShipConfig.enableLeftInnerWall.Value)
-                {
-                    var wall = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset("wall_left.prefab") as GameObject, GameObject.Find(ship).transform);
-                    
-                    if (WiderShipConfig.enableLeftInnerWallSolidMode.Value)
-                        GameObject.Find("wall_left(Clone)/Beams").SetActive(false);
-                    else
-                        GameObject.Find("wall_left(Clone)/Wall").SetActive(false);
-                }
-            }
-
-            if (side == Side.Right || side == Side.Both)
-            {
-                var wall = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset("wall_right.prefab") as GameObject, GameObject.Find(ship).transform);
-
-                if (WiderShipConfig.enableRightInnerWallSolidMode.Value)
-                    GameObject.Find("wall_right(Clone)/Beams").SetActive(false);
-                else
-                    GameObject.Find("wall_right(Clone)/Wall").SetActive(false);
-            }
-        }*/
     }
 }

@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
+    <Compile Include="Compatibility\TwoStoryShip\TwoStoryShip.cs" />
+    <Compile Include="Methods\CreateWalls.cs" />
     <Compile Include="Methods\ObjMethods.cs" />
     <Compile Include="Methods\Navmesh.cs" />
     <Compile Include="Methods\ShipSides.cs" />

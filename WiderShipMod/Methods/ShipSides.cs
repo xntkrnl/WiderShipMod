@@ -290,7 +290,7 @@ namespace WiderShipMod.Methods
 
             ///Cube.005 (2) & (1)
             ObjMethods.MoveObjToPoint("Cube.005 (2)", new Vector3(-5.92f, 1.907f, -1.103f), "Environment/HangarShip/ShipModels2b/");
-            ObjMethods.MoveObjToPoint("Cube.005 (1)", new Vector3(0.674f, 2.757f, -0.221f), "Environment/HangarShip/ShipModels2b/");
+            ObjMethods.MoveObjToPoint("Cube.005 (1)", new Vector3(0.674f, 3.2079f, 0.8735f), "Environment/HangarShip/ShipModels2b/");
             ObjMethods.RotateObj("Cube.005 (1)", Vector3.up, "Environment/HangarShip/ShipModels2b/", 180f);
 
             ///LadderShort (1)
@@ -355,7 +355,7 @@ namespace WiderShipMod.Methods
 
             ///Cube.005 (2) & (1)
             ObjMethods.MoveObjToPoint("Cube.005 (2)", new Vector3(-5.92f, 1.907f, -1.103f), "Environment/HangarShip/ShipModels2b/");
-            ObjMethods.MoveObjToPoint("Cube.005 (1)", new Vector3(0.674f, 2.757f, -0.221f), "Environment/HangarShip/ShipModels2b/");
+            ObjMethods.MoveObjToPoint("Cube.005 (1)", new Vector3(0.674f, 3.2079f, 0.8735f), "Environment/HangarShip/ShipModels2b/");
             ObjMethods.RotateObj("Cube.005 (1)", Vector3.up, "Environment/HangarShip/ShipModels2b/", 180f);
 
             ///ShipBoundsTrigger

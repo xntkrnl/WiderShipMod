@@ -6,7 +6,6 @@ using System.Reflection;
 using UnityEngine;
 using BepInEx.Configuration;
 using WiderShipMod.Patches;
-using WiderShipMod.Compatibility;
 using WiderShipMod.Compatibility.ShipWindows;
 using WiderShipMod.Compatibility.TwoStoryShip;
 
@@ -21,7 +20,7 @@ namespace WiderShipMod
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.3.3";
+        private const string modVersion = "1.3.9";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 

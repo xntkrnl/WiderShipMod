@@ -82,13 +82,13 @@ namespace WiderShipMod.Compatibility.ShipWindows
             switch (WiderShipConfig.extendedSide.Value)
             {
                 case Side.Left:
-                    return GameObject.Find("ShipLeft(Clone)");
+                    return GameObject.Find("ShipLeft");
 
                 case Side.Right:
-                    return GameObject.Find("ShipRight(Clone)");
+                    return GameObject.Find("ShipRight");
 
                 case Side.Both:
-                    return GameObject.Find("ShipBoth(Clone)");
+                    return GameObject.Find("ShipBoth");
             }
 
             return null;

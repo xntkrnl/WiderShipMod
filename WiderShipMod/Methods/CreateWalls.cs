@@ -18,11 +18,12 @@ namespace WiderShipMod.Methods
                 if (WiderShipConfig.enableLeftInnerWall.Value)
                 {
                     var wall = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset("wall_left.prefab") as GameObject, GameObject.Find("HangarShip").transform);
+                    wall.name = "wall_left";
 
                     if (WiderShipConfig.enableLeftInnerWallSolidMode.Value)
-                        GameObject.Find("wall_left(Clone)/Beams").SetActive(false);
+                        GameObject.Find("wall_left/Beams").SetActive(false);
                     else
-                        GameObject.Find("wall_left(Clone)/Wall").SetActive(false);
+                        GameObject.Find("wall_left/Wall").SetActive(false);
 
                     wall.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
                     wall.transform.localPosition = new Vector3(-6f, 0.952f, -5.224f);
@@ -34,11 +35,12 @@ namespace WiderShipMod.Methods
                 if (WiderShipConfig.enableRightInnerWall.Value)
                 {
                     var wall = WiderShipPlugin.Instantiate(WiderShipPlugin.mainAssetBundle.LoadAsset("wall_right.prefab") as GameObject, GameObject.Find("HangarShip").transform);
+                    wall.name = "wall_right";
 
                     if (WiderShipConfig.enableRightInnerWallSolidMode.Value)
-                        GameObject.Find("wall_right(Clone)/Beams").SetActive(false);
+                        GameObject.Find("wall_right/Beams").SetActive(false);
                     else
-                        GameObject.Find("wall_right(Clone)/Wall").SetActive(false);
+                        GameObject.Find("wall_right/Wall").SetActive(false);
 
                     wall.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
                     wall.transform.localPosition = new Vector3(-6, 0.952f, -8.16f);

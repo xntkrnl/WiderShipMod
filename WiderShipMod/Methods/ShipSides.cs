@@ -97,8 +97,10 @@ namespace WiderShipMod.Methods
             var ship = ObjMethods.CreateShipObj(vanilaSI, "ShipLeft.prefab", vanilaSI.layer, vanilaSI.tag);
             moddedPoster = ObjMethods.CreateShipObj(vanilaPosters, "Plane.001Left.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
+            ship.name = "ShipLeft";
             ship.transform.localPosition = Vector3.zero;
             moddedPoster.transform.localPosition = new Vector3(-8.34465e-07f, 2.157811f, -5.229f);
+
 
             ///Railing (collider)
             GameObject.Destroy(GameObject.Find("HangarShip/Railing"));
@@ -184,6 +186,7 @@ namespace WiderShipMod.Methods
             var ship = ObjMethods.CreateShipObj(vanilaSI, "ShipBoth.prefab", vanilaSI.layer, vanilaSI.tag);
             moddedPoster = ObjMethods.CreateShipObj(vanilaPosters, "Plane.001Both.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
+            ship.name = "ShipBoth";
             ship.transform.localPosition = Vector3.zero;
             moddedPoster.transform.localPosition = new Vector3(6.913f, 2.157811f, -9.453f);
 
@@ -308,6 +311,7 @@ namespace WiderShipMod.Methods
             var ship = ObjMethods.CreateShipObj(vanilaSI, "ShipRight.prefab", vanilaSI.layer, vanilaSI.tag);
             moddedPoster = ObjMethods.CreateShipObj(vanilaPosters, "Plane.001Right.fbx", vanilaPosters.layer, vanilaPosters.tag);
 
+            ship.name = "ShipRight";
             ship.transform.localPosition = Vector3.zero;
             moddedPoster.transform.localPosition = new Vector3(6.913f, 2.157811f, -9.453f);
 

@@ -27,6 +27,8 @@ namespace WiderShipMod.Methods
         {
             GameObject oldNavmesh = GameObject.Find("NavMeshColliders");
             GameObject oldNavmeshChild = GameObject.Find("PlayerShipNavmesh");
+            if (oldNavmesh == null)
+                oldNavmesh = oldNavmeshChild.transform.parent.gameObject;
 
             foreach (Transform child in oldNavmesh.transform)
             {

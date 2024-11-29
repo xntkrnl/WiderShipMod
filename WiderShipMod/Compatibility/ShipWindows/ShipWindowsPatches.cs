@@ -7,10 +7,10 @@ namespace WiderShipMod.Compatibility.ShipWindows
 {
     internal class ShipWindowsPatches
     {
+        //publicizer
         [HarmonyPostfix, HarmonyPatch(typeof(ShipReplacer), "ReplaceShip")]
         public static void ReplaceShipPatch()
         {
-            //publicizer
             StartOfRound.Instance.StartCoroutine(ShipWindowsCompat.DoWindows());
             WiderShipPlugin.mls.LogMessage("I'M ALIVE!!!");
         }

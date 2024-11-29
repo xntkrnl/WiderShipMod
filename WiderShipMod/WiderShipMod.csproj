@@ -40,6 +40,9 @@
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\Default\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
+    <Reference Include="LethalConfig">
+      <HintPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\lethal-company\profiles\1\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
+    </Reference>
     <Reference Include="ShipWindows_publicized">
       <HintPath>bin\Debug\publicized_assemblies\ShipWindows_publicized.dll</HintPath>
     </Reference>
@@ -72,6 +75,7 @@
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\LethalConfig\LethalConfig.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
     <Compile Include="Compatibility\TwoStoryShip\TwoStoryShip.cs" />

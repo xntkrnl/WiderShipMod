@@ -8,10 +8,12 @@ using BepInEx.Configuration;
 using WiderShipMod.Patches;
 using WiderShipMod.Compatibility.ShipWindows;
 using WiderShipMod.Compatibility.TwoStoryShip;
+using WiderShipMod.Compatibility.LethalConfig;
 
 
 namespace WiderShipMod
 {
+    [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("MelanieMelicious.2StoryShip", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("TestAccount666.ShipWindows", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(modGUID, modName, modVersion)]
@@ -57,6 +59,11 @@ namespace WiderShipMod
             }
 
             mls.LogInfo("Wider Ship Mod loaded. Patching.");
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("ainavt.lc.lethalconfig"))
+            {
+                LethalConfigCompat.LethalConfigSetup();
+            }
+
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("MelanieMelicious.2StoryShip"))
             {
                 is2StoryHere = true;

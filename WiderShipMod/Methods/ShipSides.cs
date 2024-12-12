@@ -359,7 +359,7 @@ namespace WiderShipMod.Methods
             ObjMethods.RotateObj("Cube.005 (1)", Vector3.up, "Environment/HangarShip/ShipModels2b/", 180f);
 
             ///ShipBoundsTrigger
-            ObjMethods.MoveObjToPoint("ShipBoundsTrigger", new Vector3(1.4908f, 4.1675f, -4.657f), "Environment/HangarShip/");
+            ObjMethods.MoveObjToPoint("ShipBoundsTrigger", new Vector3(1.4908f, 4.1675f, -4.157f), "Environment/HangarShip/");
             ObjMethods.ScaleObj("ShipBoundsTrigger", new Vector3(23.75926f, 10.11447f, 14f), "Environment/HangarShip/");
 
             ///ShipInnerRoomBoundsTrigger

@@ -40,6 +40,9 @@
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\Default\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
+    <Reference Include="CelestialTint_publicized">
+      <HintPath>bin\Debug\publicized_assemblies\CelestialTint_publicized.dll</HintPath>
+    </Reference>
     <Reference Include="LethalConfig">
       <HintPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\lethal-company\profiles\1\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
     </Reference>

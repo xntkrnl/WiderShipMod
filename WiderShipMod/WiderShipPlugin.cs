@@ -9,12 +9,14 @@ using WiderShipMod.Patches;
 using WiderShipMod.Compatibility.ShipWindows;
 using WiderShipMod.Compatibility.TwoStoryShip;
 using WiderShipMod.Compatibility.LethalConfig;
+using WiderShipMod.Compatibility.CelestialTint;
 
 
 namespace WiderShipMod
 {
     [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("MelanieMelicious.2StoryShip", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("CelestialTint", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("TestAccount666.ShipWindows", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(modGUID, modName, modVersion)]
     public class WiderShipPlugin : BaseUnityPlugin
@@ -77,6 +79,12 @@ namespace WiderShipMod
                 mls.LogMessage("Hi TestAccount666.");
                 //isShipWindowsHere = true;
                 harmony.PatchAll(typeof(ShipWindowsPatches));
+            }
+
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("CelestialTint"))
+            {
+                mls.LogMessage("Celestial Tint found.");
+                harmony.PatchAll(typeof(CelestialTintPatch));
             }
 
             harmony.PatchAll(typeof(WiderShipPatches));

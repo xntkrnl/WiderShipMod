@@ -75,6 +75,7 @@
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\CelestialTint\CelestialTintPatch.cs" />
     <Compile Include="Compatibility\LethalConfig\LethalConfig.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
     <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
@@ -89,6 +90,5 @@
     <Compile Include="WiderShipConfig.cs" />
     <Compile Include="WiderShipPlugin.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

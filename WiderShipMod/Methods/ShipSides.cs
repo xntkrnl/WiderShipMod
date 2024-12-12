@@ -373,6 +373,10 @@ namespace WiderShipMod.Methods
             string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
             foreach (string lamp in lamps)
                 ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
+
+            ///SideMachineryRight and stuff
+            ObjMethods.SetChildObjToParentObj("MeterBoxDevice.001", "SideMachineryRight", "Environment/HangarShip/", "Environment/HangarShip/");
+            ObjMethods.MoveObjToPoint("SideMachineryRight", new Vector3(-4f, 1.947363f, 1.08f), "Environment/HangarShip/");
         }
     }
 }

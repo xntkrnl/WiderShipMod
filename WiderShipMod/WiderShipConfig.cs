@@ -54,7 +54,7 @@ namespace WiderShipMod
                 "Enable this if you (as a client) want to generate navmesh.\n" +
                 "It won't speed up map loading, but will most likely slow it down for everyone.\n" +
                 "Made for testing and debugging in case of anything.");
-            blacklist = cfg.Bind("Navmesh", "Moon Blacklist", "44 Atlantica,46 Infernis,134 Oldred,154 Etern",
+            blacklist = cfg.Bind("Navmesh", "Moon Blacklist", "42 Cosmocos, 67 Utril",
                 "On these moons,Wider Ship will try to PLACE its own navmesh instead of the vanilla one.\n" +
                 "(Fast, buggy)");
             whitelist = cfg.Bind("Navmesh", "Moon Whitelist", "220 Assurance,5 Embrion",

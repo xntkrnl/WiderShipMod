@@ -13,9 +13,9 @@ namespace WiderShipMod.Patches
     {
         
 
-        [HarmonyAfter("TestAccount666.ShipWindows")]
-        [HarmonyPrefix, HarmonyPatch(typeof(StartOfRound), "Start")]
-        static void StartPatch()
+        [HarmonyBefore("TestAccount666.ShipWindows", "TestAccount666.ShipWindowsBeta")]
+        [HarmonyPrefix, HarmonyPatch(typeof(HUDManager), "Awake")]
+        static void HudManagerAwakePatch()
         {
             ShipSidesMethods.Init();
             ShipSidesMethods.CreateShip();

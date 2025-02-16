@@ -38,7 +38,9 @@ namespace WiderShipMod.Methods
         public static void DestroyStuff()
         {
             //GameObject.Destroy(vanilaSI);
-            vanilaSI.SetActive(false);
+            //vanilaSI.SetActive(false);
+            vanilaSI.GetComponent<MeshRenderer>().enabled = false;
+            vanilaSI.GetComponent<MeshCollider>().enabled = false;
             GameObject.Destroy(vanilaSR);
             GameObject.Destroy(vanilaSRP);
             GameObject.Destroy(vanilaCatwalk);
@@ -363,7 +365,7 @@ namespace WiderShipMod.Methods
             ObjMethods.ScaleObj("ShipBoundsTrigger", new Vector3(23.75926f, 10.11447f, 14f), "Environment/HangarShip/");
 
             ///ShipInnerRoomBoundsTrigger
-            ObjMethods.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -3.9242f), "Environment/HangarShip/");
+            ObjMethods.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -4.1242f), "Environment/HangarShip/");
             ObjMethods.ScaleObj("ShipInnerRoomBoundsTrigger", new Vector3(17.52326f, 5.341722f, 11f), "Environment/HangarShip/");
 
             ///WallInsulator

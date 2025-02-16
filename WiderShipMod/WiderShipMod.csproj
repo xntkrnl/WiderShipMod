@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +48,9 @@
     <Reference Include="LethalConfig">
       <HintPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\lethal-company\profiles\1\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
     </Reference>
-    <Reference Include="ShipWindows_publicized">
-      <HintPath>bin\Debug\publicized_assemblies\ShipWindows_publicized.dll</HintPath>
+    <Reference Include="ShipWindowsBeta, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ShipWindowsBeta.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,9 +83,9 @@
   <ItemGroup>
     <Compile Include="Compatibility\CelestialTint\CelestialTintPatch.cs" />
     <Compile Include="Compatibility\LethalConfig\LethalConfig.cs" />
-    <Compile Include="Compatibility\ShipWindows\ShipWindows.cs" />
-    <Compile Include="Compatibility\ShipWindows\ShipWindowsPatches.cs" />
+    <Compile Include="Compatibility\ShipWindowsBeta\ShipWindowsBeta.cs" />
     <Compile Include="Compatibility\TwoStoryShip\TwoStoryShip.cs" />
+    <Compile Include="Compatibility\CompatibilityUtilities.cs" />
     <Compile Include="Methods\CreateWalls.cs" />
     <Compile Include="Methods\ObjMethods.cs" />
     <Compile Include="Methods\Navmesh.cs" />
@@ -92,6 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WiderShipConfig.cs" />
     <Compile Include="WiderShipPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="bin\Debug\ShipWindowsBeta.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

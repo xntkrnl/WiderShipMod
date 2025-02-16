@@ -108,10 +108,10 @@ namespace WiderShipMod.Methods
             ///LadderShort (1)
             ObjMethods.MoveObjToPoint("LadderShort (1)", new Vector3(-6.93f, -2.58f, -16.156f), "Environment/HangarShip/");
 
-            ///Lamps
+            /*///Lamps
             string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (9)" };
             foreach (string lamp in lamps)
-                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";
+                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";*/
 
             ///ShipInnerRoomBoundsTrigger
             ObjMethods.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -9.1742f), "Environment/HangarShip/");
@@ -235,14 +235,14 @@ namespace WiderShipMod.Methods
             ObjMethods.MoveObjToPoint("ShipInnerRoomBoundsTrigger", new Vector3(1.4367f, 1.781f, -6.661f), "Environment/HangarShip/");
             ObjMethods.ScaleObj("ShipInnerRoomBoundsTrigger", new Vector3(17.52326f, 5.341722f, 16f), "Environment/HangarShip/");
 
-            ///Lamps
+            /*///Lamps
             string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
             foreach (string lamp in lamps)
                 ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, -4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_left";
 
             lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
             foreach (string lamp in lamps)
-                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
+                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";*/
 
             ///SideMachineryLeft and stuff
             ObjMethods.SetChildObjToParentObj("Pipework2.002", "SideMachineryLeft", "Environment/HangarShip/", "Environment/HangarShip/");
@@ -369,10 +369,10 @@ namespace WiderShipMod.Methods
             ///WallInsulator
             GameObject.Find("Environment/HangarShip/WallInsulator").SetActive(false);
 
-            ///Lamps
+            /*///Lamps
             string[] lamps = new string[6] { "HangingLamp (3)", "HangingLamp (4)", "Area Light (4)", "Area Light (5)", "Area Light (8)", "Area Light (7)" };
             foreach (string lamp in lamps)
-                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";
+                ObjMethods.CopyObj(lamp, new Vector3(0f, 0f, 4.5f), "Environment/HangarShip/ShipElectricLights/").name += "_right";*/
 
             ///SideMachineryRight and stuff
             ObjMethods.SetChildObjToParentObj("MeterBoxDevice.001", "SideMachineryRight", "Environment/HangarShip/", "Environment/HangarShip/");

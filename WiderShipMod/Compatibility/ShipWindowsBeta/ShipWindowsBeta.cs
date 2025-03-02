@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ShipWindows;
 using ShipWindows.Api;
 using ShipWindows.Api.events;
 using ShipWindows.ShutterSwitch;
@@ -15,12 +16,12 @@ namespace WiderShipMod.Compatibility.ShipWindowsBeta
     {
         internal static void RemoveRoofWindow()
         {
-            Type type = typeof(WindowRegistry);
+            /*Type type = typeof(WindowRegistry);
             FieldInfo fieldInfo = type.GetField("windows", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var windows = (HashSet<WindowInfo>)fieldInfo.GetValue(ShipWindows.ShipWindows.windowRegistry);
+            var windows = (HashSet<WindowInfo>)fieldInfo.GetValue(ShipWindows.ShipWindows.windowRegistry);*/
 
-            foreach (var window in windows)
+            foreach (var window in ShipWindows.ShipWindows.windowRegistry.Windows)
             {
                 WiderShipPlugin.mls.LogMessage($"{window.windowName}, {window.windowType}");
                 if (window.windowName == "Roof Window")
@@ -29,11 +30,6 @@ namespace WiderShipMod.Compatibility.ShipWindowsBeta
                     break;
                 }
             }
-
-            //if this project was on net2.1
-            /*foreach (var window in ShipWindows.ShipWindows.windowRegistry.windows)
-                if (window.windowName == "Roof Window")
-                    ShipWindows.ShipWindows.windowRegistry.UnregisterWindow(window);*/
         }
     }
 

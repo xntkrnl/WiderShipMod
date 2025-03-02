@@ -53,6 +53,11 @@ namespace WiderShipMod.Patches
             if (whitelist.Contains(TimeOfDay.Instance.currentLevel.PlanetName))
             {
                 GameObject.FindGameObjectWithTag("OutsideLevelNavMesh").GetComponent<NavMeshSurface>().BuildNavMesh();
+                //im lazy to fix it in unity
+                var offmesh = GameObject.Find("ShipLadder3");
+                offmesh.transform.position = new Vector3(7.3302f, 1.069f, -3.9058f);
+                offmesh.GetComponent<OffMeshLink>().UpdatePositions();
+
                 return;
             }
 

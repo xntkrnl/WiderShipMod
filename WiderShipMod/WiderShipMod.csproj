@@ -48,7 +48,7 @@
     <Reference Include="LethalConfig">
       <HintPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\lethal-company\profiles\1\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
     </Reference>
-    <Reference Include="ShipWindowsBeta, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ShipWindowsBeta, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\ShipWindowsBeta.dll</HintPath>
     </Reference>

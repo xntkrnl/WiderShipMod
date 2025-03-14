@@ -26,8 +26,6 @@ namespace WiderShipMod.Patches
         {
             if (!WiderShipConfig.enableBuildNewNavmesh.Value) return; //do not build anything
 
-            if (!GameNetworkManager.Instance.isHostingGame || WiderShipConfig.enableClientBuildNavmeshToo.Value) return;
-
             string[] whitelist = WiderShipConfig.whitelist.Value.Split(','); //slow
             string[] blacklist = WiderShipConfig.blacklist.Value.Split(','); //fast
 
@@ -44,8 +42,6 @@ namespace WiderShipMod.Patches
         static void FinishGeneratingLevelPost()
         {
             if (!WiderShipConfig.enableBuildNewNavmesh.Value) return; //do not build anything
-
-            if (!GameNetworkManager.Instance.isHostingGame || WiderShipConfig.enableClientBuildNavmeshToo.Value) return;
 
             string[] whitelist = WiderShipConfig.whitelist.Value.Split(','); //slow
             string[] blacklist = WiderShipConfig.blacklist.Value.Split(','); //fast

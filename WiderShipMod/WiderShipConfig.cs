@@ -14,15 +14,12 @@ namespace WiderShipMod
         internal static ConfigEntry<Side> extendedSide;
         //internal static ConfigEntry<bool> enableWarning;
 
-        internal static ConfigEntry<bool> enableForceDontMovePosters;
-
         internal static ConfigEntry<bool> enableLeftInnerWall;
         internal static ConfigEntry<bool> enableLeftInnerWallSolidMode;
         internal static ConfigEntry<bool> enableRightInnerWall;
         internal static ConfigEntry<bool> enableRightInnerWallSolidMode;
 
         internal static ConfigEntry<bool> enableBuildNewNavmesh;
-        internal static ConfigEntry<bool> enableClientBuildNavmeshToo;
         internal static ConfigEntry<string> whitelist;
         internal static ConfigEntry<string> blacklist;
         internal static ConfigEntry<string> example;
@@ -33,10 +30,6 @@ namespace WiderShipMod
                 "Left - only left side.\nRight - only right side.\nBoth - both sides.");
             //enableWarning = cfg.Bind("General", "Enable Warning", true,
             //    "Enable if you want to know when to expect more bugs lol.");
-
-            enableForceDontMovePosters = cfg.Bind("Compatibility", "Force Dont move posters to true", true,
-                "Force \"Don't move posters\" to true so that the posters don't hang in the middle of the ship.\n" +
-                "It probably won't matter in the future if TestAccount666 makes DontMovePosters true by default.");
 
             enableLeftInnerWall = cfg.Bind("Walls", "Enable Left Inner Wall", true,
                 "Enable this if you want to have a wall between the new ship part and the vanilla one.");
@@ -50,10 +43,6 @@ namespace WiderShipMod
             enableBuildNewNavmesh = cfg.Bind("Navmesh", "Enable New Navmesh", true,
                 "Enable this to generate new navmesh (YOU DON't WANT THIS TO BE FALSE!!!)\n" +
                 "Only for testing purposes.");
-            enableClientBuildNavmeshToo = cfg.Bind("Navmesh", "Enable Client Build Navmesh Too", false,
-                "Enable this if you (as a client) want to generate navmesh.\n" +
-                "It won't speed up map loading, but will most likely slow it down for everyone.\n" +
-                "Made for testing and debugging in case of anything.");
             blacklist = cfg.Bind("Navmesh", "Moon Blacklist", "42 Cosmocos, 67 Utril",
                 "On these moons,Wider Ship will try to PLACE its own navmesh instead of the vanilla one.\n" +
                 "(Fast, buggy)");

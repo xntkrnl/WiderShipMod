@@ -3,6 +3,7 @@ using ShipWindows;
 using ShipWindows.Api;
 using ShipWindows.Api.events;
 using ShipWindows.ShutterSwitch;
+using ShipWindows.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,15 +49,43 @@ namespace WiderShipMod.Compatibility.ShipWindowsBeta
         }
 
         [HarmonyAfter("TestAccount666.ShipWindows", "TestAccount666.ShipWindowsBeta")]
-        [HarmonyPostfix, HarmonyPatch(typeof(HUDManager), "Awake")]
-        internal static void DeactivateShipWindowsShip() // => ShipWindows.ShipWindows.windowManager.decapitatedShip.SetActive(false);
+        [HarmonyPostfix, HarmonyPatch(typeof(WindowManager), MethodType.Constructor)] //wow we can patch constructors
+        internal static void DeactivateShipWindowsShip(ref WindowManager __instance)
         {
+            StartOfRound.Instance.StartCoroutine(DeactivateShipWindowsShipCoroutine());
+        }
+
+        private static IEnumerator DeactivateShipWindowsShipCoroutine()
+        {
+            yield return null;
+
             ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("Door").gameObject.SetActive(false);
-            ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("Floor").gameObject.SetActive(false);
             ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("Roof").gameObject.SetActive(false);
             ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("SideBack").gameObject.SetActive(false);
-            ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("SideLeft").gameObject.SetActive(false);
-            ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("SideRight").gameObject.SetActive(false);
+
+            var transfromToCheck = ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("Floor");
+            if (transfromToCheck.gameObject.activeSelf)
+            {
+                transfromToCheck.gameObject.SetActive(false);
+                WiderShipPlugin.windowGOs[2].SetActive(false);
+                WiderShipPlugin.vanilaGOs[2].SetActive(true);
+            }
+
+            transfromToCheck = ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("SideLeft");
+            if (transfromToCheck.gameObject.activeSelf)
+            {
+                transfromToCheck.gameObject.SetActive(false);
+                WiderShipPlugin.windowGOs[0].SetActive(false);
+                WiderShipPlugin.vanilaGOs[0].SetActive(true);
+            }
+
+            transfromToCheck = ShipWindows.ShipWindows.windowManager.decapitatedShip.transform.Find("SideRight");
+            if (transfromToCheck.gameObject.activeSelf)
+            {
+                transfromToCheck.gameObject.SetActive(false);
+                WiderShipPlugin.windowGOs[1].SetActive(false);
+                WiderShipPlugin.vanilaGOs[1].SetActive(true);
+            }
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(StartOfRound), "OnDestroy")]

@@ -1,14 +1,8 @@
 ﻿using HarmonyLib;
-using ShipWindows;
-using ShipWindows.Api;
 using ShipWindows.Api.events;
 using ShipWindows.ShutterSwitch;
 using ShipWindows.Utilities;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
 using UnityEngine;
 
 namespace WiderShipMod.Compatibility.ShipWindowsBeta

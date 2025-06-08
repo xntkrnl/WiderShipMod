@@ -9,9 +9,6 @@ using WiderShipMod.Patches;
 using WiderShipMod.Compatibility.TwoStoryShip;
 using WiderShipMod.Compatibility.LethalConfig;
 using WiderShipMod.Compatibility.CelestialTint;
-using BepInEx.Bootstrap;
-using System;
-using WiderShipMod.Compatibility;
 using WiderShipMod.Compatibility.ShipWindowsBeta;
 
 
@@ -21,14 +18,13 @@ namespace WiderShipMod
     [BepInDependency("MelanieMelicious.2StoryShip", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("CelestialTint", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("TestAccount666.ShipWindows", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("TestAccount666.ShipWindowsBeta", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(modGUID, modName, modVersion)]
     public class WiderShipPlugin : BaseUnityPlugin
     {
         // Mod Details
         private const string modGUID = "mborsh.WiderShipMod";
         private const string modName = "WiderShipMod";
-        private const string modVersion = "1.3.19";
+        private const string modVersion = "1.4.2";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -77,17 +73,11 @@ namespace WiderShipMod
                 return;
             }
 
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindows") || Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindowsBeta"))
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindows"))
             {
                 mls.LogMessage("Hi TestAccount666.");
-                if (!(CompatibilityUtilities.IsInstalledVersionGreaterOrEquallThanNeeded("TestAccount666.ShipWindows", new Version(2, 0, 0)) || Chainloader.PluginInfos.ContainsKey("TestAccount666.ShipWindowsBeta")))
-                    mls.LogError("Older version of ShipWindows is present. You need to change the version of WiderShipMod to 1.3.13");
-                else
-                {
-                    mls.LogInfo("ShipWindowsBeta or ShipWindows 2.x.x found");
-                    ShipWindowsUtils.RemoveRoofWindow();
-                    harmony.PatchAll(typeof(ShipWindowsBetaPatches));
-                }
+                ShipWindowsUtils.RemoveRoofWindow();
+                harmony.PatchAll(typeof(ShipWindowsBetaPatches));
             }
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("CelestialTint"))

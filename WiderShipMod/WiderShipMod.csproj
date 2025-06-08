@@ -36,7 +36,8 @@
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\Default\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
@@ -48,9 +49,8 @@
     <Reference Include="LethalConfig">
       <HintPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\lethal-company\profiles\1\BepInEx\plugins\AinaVT-LethalConfig\LethalConfig\LethalConfig.dll</HintPath>
     </Reference>
-    <Reference Include="ShipWindowsBeta, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ShipWindowsBeta.dll</HintPath>
+    <Reference Include="ShipWindows">
+      <HintPath>..\..\references\TestAccount666-ShipWindows\ShipWindows.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,7 +83,7 @@
   <ItemGroup>
     <Compile Include="Compatibility\CelestialTint\CelestialTintPatch.cs" />
     <Compile Include="Compatibility\LethalConfig\LethalConfig.cs" />
-    <Compile Include="Compatibility\ShipWindowsBeta\ShipWindowsBeta.cs" />
+    <Compile Include="Compatibility\ShipWindowsBeta\ShipWindows.cs" />
     <Compile Include="Compatibility\TwoStoryShip\TwoStoryShip.cs" />
     <Compile Include="Compatibility\CompatibilityUtilities.cs" />
     <Compile Include="Methods\CreateWalls.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="WiderShipPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\..\..\..\..\..\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll" />
     <Analyzer Include="bin\Debug\ShipWindowsBeta.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

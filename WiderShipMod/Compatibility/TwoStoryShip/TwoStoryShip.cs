@@ -8,7 +8,7 @@ namespace WiderShipMod.Compatibility.TwoStoryShip
     {
         internal static void Init(Harmony h)
         {
-            h.PatchAll(typeof(LightPatches));
+            //h.PatchAll(typeof(LightPatches));
             h.PatchAll(typeof(TwoStoryShip));
         }
 

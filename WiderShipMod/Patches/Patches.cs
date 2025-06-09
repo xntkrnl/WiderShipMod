@@ -63,8 +63,6 @@ namespace WiderShipMod.Patches
 
             if (blacklist.Contains(TimeOfDay.Instance.currentLevel.PlanetName))
                 return; //SHOULD be builded already
-
-            WiderShipPlugin.mls.LogError("How did you even get there? THIS IS SUPER BAD!!!");
         }
 
         //It would be (prob) easier to remove "if (num2 > 0)" but what if there are other mods that are looking for it?
